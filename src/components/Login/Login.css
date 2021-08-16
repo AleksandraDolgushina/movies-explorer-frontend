@@ -1,0 +1,89 @@
+.login {
+    max-width: 385px;
+    margin: 0 auto;
+    margin-bottom: 70px;
+}
+.login__form {
+    margin: 40px 0 15px;
+    display: flex;
+    flex-direction: column;
+}
+.login__title {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+.login__item {
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 400;
+    color: #A0A0A0;
+}
+.login__input {
+    width: 395px;
+    padding: 15px;
+    border: none;
+    font-size: 13px;
+    line-height: 16px;
+    background-color: #F9F9F9;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.login__input:focus {
+    outline: none;
+}
+.login__save-button {
+    height: 45px;
+    border: none;
+    color: white;
+    margin-top: 69px;
+    padding: 0;
+    transition: opacity .2s ease-in;
+    background: #3456f3;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+}
+.login__text {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0;
+    text-align: center;
+}
+.login__save-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity ease-in .2s;
+}
+.login__link {
+    text-decoration: none;
+    transition: opacity ease-in .2s;
+    color: #3456F3;
+} 
+.login__link:hover {
+    opacity: .7; 
+    cursor: pointer;
+    transition: opacity ease-in .2s;
+}
+.login__item:focus {
+    outline: none;
+}
+@media screen and (max-width: 520px) {
+    .login {
+        max-width: 260px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .login__input {
+        width: 260px;
+    }
+    .login__form {
+        align-items: center;
+    }
+}

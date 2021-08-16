@@ -1,0 +1,33 @@
+.nav {
+    height: 66px;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+.nav__links {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 24px;
+}
+.nav__link {
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    color: white;
+    margin-right: 40px;
+    text-decoration: none;
+    border-bottom: 1px solid white;
+}
+.nav__link:hover {
+    opacity: .7;
+    cursor: pointer;
+    transition: opacity ease-in .2s;
+}
+@media screen and (max-width: 520px) {
+    .nav__link {
+        font-size: 11px;
+        margin-right: 24px;
+    }
+}
