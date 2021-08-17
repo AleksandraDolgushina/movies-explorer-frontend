@@ -191,4 +191,7 @@
         margin-right: 14px;
         font-size: 10px;
     }
+    .header__nav {
+        min-width: 100vw;
+    }
 }

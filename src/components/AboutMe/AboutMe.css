@@ -82,7 +82,7 @@
 }
 @media screen and (max-width: 520px) {
     .student {
-        margin: 70px auto;
+        padding: 70px 0;
     }
     .student__title {
         font-size: 18px;

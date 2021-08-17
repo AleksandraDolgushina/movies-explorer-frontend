@@ -1,5 +1,4 @@
 .portfolio {
-    margin: 100px 0 125px 0px;
     width: 90vw;
     margin: auto;
 }
@@ -47,9 +46,6 @@
     }
 }
 @media screen and (max-width: 520px) {
-    .portfolio {
-        margin: 70px auto;
-    }
     .portfolio__title {
         font-size: 14px;
         line-height: 20px;
