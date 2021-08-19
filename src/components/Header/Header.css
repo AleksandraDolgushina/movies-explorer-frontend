@@ -1,0 +1,197 @@
+.header {
+    margin: auto;
+    min-height: 74px;
+    position: relative;
+}
+.header__main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #073042;
+}
+.header__logo {
+    margin: 18px 0 18px 60px;
+}
+.header__logo:hover {
+    opacity: .8;
+    transition: opacity ease-in .2s;
+}
+.header__container {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+}
+.header__signup {
+    color: white;
+    margin-right: 30px;
+    text-decoration: none;
+}
+.header__signup:hover {
+    opacity: .7;
+    transition: opacity ease-in .2s;
+}
+.header__signin {
+    color: black;
+    background-color: #2BE080;
+    border-radius: 3px;
+    text-align: center;
+    padding: 8px 20px;
+    text-decoration: none;
+    margin-right: 70px;
+}
+.header__signin:hover {
+    opacity: .8;
+    transition: opacity ease-in .2s;
+}
+.header__other {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__nav {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 16px;
+}
+.header__nav-main {
+    display: none;
+}
+.header__movies {
+    font-weight: 500;
+    text-decoration: none;
+    margin-right: 20px;
+    color: black;
+}
+.header__movies:hover {
+    opacity: .7;
+    cursor: pointer;
+    transition: opacity ease-in .2s;
+}
+.header__saved-movies {
+    font-weight: 400;
+    margin-right: 50px;
+    text-decoration: none;
+    color: black;
+}
+.header__saved-movies:hover {
+    opacity: .7;
+    cursor: pointer;
+    transition: opacity ease-in .2s;
+}
+.header__profile {
+    background-color: #F5F5F5;
+    border-radius: 20px;
+    text-align: center;
+    padding: 8px 20px;
+    text-decoration: none;
+    color: black;
+    margin-right: 50px;
+    font-weight: 500;
+}
+.header__profile:hover {
+    opacity: .8;
+    cursor: pointer;
+    transition: opacity ease-in .2s;
+}
+.header__open-menu {
+    background-image: url(../../images/menu.svg);
+    width: 44px;
+    height: 44px;
+    margin-right: 30px;
+    display: none;
+}
+.header__open-menu:hover {
+    opacity: .8;
+    cursor: pointer;
+    transition: opacity ease-in .2s;
+}
+.header__close-menu {
+    width: 30px;
+    height: 30px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background-image: url(../../images/close.svg);
+}
+@media screen and (max-width: 1100px) {
+    .header__item {
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,.3);
+        z-index: 2;
+        visibility: visible;
+        opacity: 1;
+        transition: visibility .2s, opacity .2s linear;
+    }
+    .header__item_hidden {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility .3s, opacity .3s ease;
+    }
+    .header__open-menu {
+        display: block;
+    }
+    .header__nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        min-height: 100vh;
+        min-width: 60vw;
+        background-color: white;
+        flex-direction: column;
+        margin: 0;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+        padding: 14px;
+        padding-top: 159px;
+    }
+    .header__close-menu {
+        display: block;
+    }
+    .header__profile {
+        margin-top: 500px;
+        margin-right: 0;
+    }
+    .header__nav-main {
+        display: block;
+        margin-bottom: 28px;
+        text-decoration: none;
+        color: black;
+    }
+    .header__movies {
+        margin: 0;
+        margin-bottom: 28px;
+        text-decoration: underline;
+    }
+    .header__saved-movies {
+        margin: 0;
+    }
+}
+@media screen and (max-width: 520px) {
+    .header__logo {
+        margin-left: 14px;
+    }
+    .header__signup {
+        margin-left: 14px;
+        font-size: 10px;
+    }
+    .header__signin {
+        margin-right: 14px;
+        font-size: 10px;
+    }
+    .header__nav {
+        min-width: 100vw;
+    }
+}
