@@ -170,7 +170,7 @@ const App = () => {
 
   function getSavedMovies() {
     mainApi
-      .getMoveis()
+      .getMovies()
       .then((data) => {
         const savedArray = data.map((item) => {
           return { ...item, id: toString(item.movieId) }
