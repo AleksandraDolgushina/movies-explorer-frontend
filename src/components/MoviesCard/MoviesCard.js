@@ -1,20 +1,39 @@
+import React from 'react';
 import { Route } from 'react-router-dom';
 import './MoviesCard.css'
 
-function MoviesCard() {
+function MoviesCard({movie, isSavedMovies, onLikeClick, savedMovies}) {
+    const { image, nameRU, duration, trailer } = movie;
+    const isSaved = isSavedMovies(movie);
+    const cardLikeButtonClassName = (
+        `movie__like ${isSaved && 'movie__like_active'}`
+    );
+
+    function handleLikeClick(evt) {
+        evt.preventDefault()
+        onLikeClick(movie, !isSaved)
+    }
+
+    function handleDeleteClick() {
+        onLikeClick(movie, isSaved)
+    }
+
     return (
         <div className="movie">
-            <div className="movie__image"></div>
+            <a href={trailer} target="_blank" className="movie__image" rel="noreferrer">
+                <img className="movie__image" src={image} alt="Обложка фильма" />
+            </a>
             <div className="movie__title">
-                <h2 className="movie__name">33 слова о дизайне</h2>
-                <Route path='/movies'>
-                    <button className="movie__like"></button>
-                </Route>
+                <h2 className="movie__name">{nameRU}</h2>
+                {savedMovies ? (
+                    <button className="movie__delete" onClick={handleDeleteClick}></button>
+                    ) : (
+                    <button className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
+                )}
                 <Route path='/saved-movies'>
-                    <button className="movie__delete"></button>
                 </Route>
             </div>
-            <p className="movie__duration">1ч42м</p>
+            <p className="movie__duration">{duration}</p>
         </div>
     )
 }

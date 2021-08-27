@@ -1,7 +1,6 @@
 .login {
     max-width: 385px;
-    margin: 0 auto;
-    margin-bottom: 70px;
+    margin: 70px auto;
 }
 .login__form {
     margin: 40px 0 15px;
