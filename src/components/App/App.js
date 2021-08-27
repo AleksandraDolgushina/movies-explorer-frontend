@@ -53,7 +53,7 @@ const App = () => {
       .register(name, email, password)
       .then((res) => {
         if (res) {
-          history.push("/signin");
+          handleLogin(email, password)
         }
       })
       .catch((err) => {
