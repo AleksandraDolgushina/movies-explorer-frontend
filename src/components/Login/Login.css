@@ -48,6 +48,15 @@
     line-height: 17px;
     width: 100%;
 }
+.login__save-button:disabled {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+    opacity: .2;
+    cursor: default;
+}
 .login__text {
     font-size: 14px;
     line-height: 17px;

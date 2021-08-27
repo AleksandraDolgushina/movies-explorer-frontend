@@ -103,7 +103,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-    address: 'https://dolgushina.diploma.nomoredomains.club',
+    address: 'https://api.dolgushina.diploma.nomoredomains.monster',
     headers: {
         'Content-Type': 'application/json'
         }
