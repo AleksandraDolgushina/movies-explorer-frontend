@@ -51,7 +51,8 @@ const App = () => {
     }
     mainApi
       .register(name, email, password)
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         history.push("/signin")
       })
       .catch((err) => {
