@@ -82,7 +82,7 @@ class MainApi {
         }).then(this._handleResponse);
       };
       
-    register({ name, email, password }) {
+    register( name, email, password ) {
         return fetch(`${this._address}/signup`, {
           method: 'POST',
           credentials: 'include',
@@ -91,7 +91,7 @@ class MainApi {
         }).then(this._handleResponse);
       };
       
-    authorize({ email, password }) {
+    authorize( email, password ) {
         return fetch(`${this._address}/signin`, {
           method: 'POST',
           credentials: 'include',
@@ -99,7 +99,7 @@ class MainApi {
           body: JSON.stringify({ email, password }),
         }).then(this._handleResponse);
       };
-      
+
     getContent = (token) => {
         return fetch(`${this._address}/users/me`, {
           method: 'GET',

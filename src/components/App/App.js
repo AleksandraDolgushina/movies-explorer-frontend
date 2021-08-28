@@ -49,6 +49,7 @@ const App = () => {
     if (!name || !email || !password) {
       return
     }
+    console.log( name, email, password )
     mainApi
       .register(name, email, password)
       .then((res) => {
