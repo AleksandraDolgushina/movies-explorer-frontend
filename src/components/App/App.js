@@ -87,7 +87,7 @@ const App = () => {
   function getCurrentUser() {
     const token = localStorage.getItem('jwt')
     mainApi
-      .getCurrentUser(token)
+      .getContent(token)
       .then((res) => {
         if (res) {
           setCurrentUser(res)
