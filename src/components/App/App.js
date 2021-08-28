@@ -33,7 +33,7 @@ const App = () => {
         mainApi.getContent(jwt)
         .then( res => {
           setLoggedIn(true)
-          getCurrentUser()
+          //getCurrentUser()
         })
         .catch((err) => {
           console.log(err)
@@ -70,7 +70,7 @@ const App = () => {
       .then((res) => {
         localStorage.setItem('jwt', res.token)
         setLoggedIn(true)
-        getCurrentUser()
+        //getCurrentUser()
         history.push('/movies')
       })
       .catch((err) => {
@@ -84,20 +84,20 @@ const App = () => {
       })
   }
 
-  function getCurrentUser() {
-    const token = localStorage.getItem('jwt')
-    mainApi
-      .getContent(token)
-      .then((res) => {
-        if (res) {
-          setCurrentUser(res)
-          localStorage.setItem('currentUser', JSON.stringify(res))
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  // function getCurrentUser() {
+  //   const token = localStorage.getItem('jwt')
+  //   mainApi
+  //     .getContent(token)
+  //     .then((res) => {
+  //       if (res) {
+  //         setCurrentUser(res)
+  //         localStorage.setItem('currentUser', JSON.stringify(res))
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
 
   function handleSaveProfile(data) {
     mainApi
@@ -151,7 +151,6 @@ const App = () => {
             trailer: item.trailerLink,
           }
         })
-
         localStorage.setItem('initialMovies', JSON.stringify(initialArray))
         setInitialMovies(initialArray)
       })
