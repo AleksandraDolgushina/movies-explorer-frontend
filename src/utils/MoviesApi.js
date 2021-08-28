@@ -16,12 +16,10 @@ export class MoviesApi {
     }
   
     getMovies() {
-      return this._getResponseData(
-        fetch(`${this._address}`, {
-          method: 'GET',
+      return fetch(`${this._address}`, {
           headers: this._headers,
         })
-      )
+        .then(this._getResponseData)
     }
   }
   

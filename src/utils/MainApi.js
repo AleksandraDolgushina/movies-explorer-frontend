@@ -18,7 +18,7 @@ class MainApi {
         .then(this._handleResponse)
     ;}
 
-    getMovies() {
+    getUserMovies() {
         return fetch(`${this._address}/movies`, {
             credentials: 'include',
             headers: this._headers,

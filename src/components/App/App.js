@@ -101,7 +101,7 @@ const App = () => {
 
   function handleSaveProfile(data) {
     mainApi
-      .saveProfile(data)
+      .editUser(data)
       .then((profile) => {
         setCurrentUser(profile)
         setTextPopup('Профиль обновлен')
@@ -140,31 +140,24 @@ const App = () => {
   const [query, setQuery] = React.useState('')
 
   function getInitialMovies() {
-    moviesApi
-      .getMovies()
-      .then((data) => {
-        const initialArray = data.map((item) => {
-          const imageURL = item.image ? item.image.url : ''
-          return {
-            ...item,
-            image: `https://api.nomoreparties.co${imageURL}`,
-            trailer: item.trailerLink,
-          }
+    if (loggedIn) {
+      setIsLoading(true);
+      moviesApi
+        .getMovies()
+        .then((data) => {
+          localStorage.setItem('initialMovies', JSON.stringify(data))
         })
-        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
-        setInitialMovies(initialArray)
-      })
-      .catch((err) => {
-        localStorage.removeItem('initialMovies')
-        setLoadingError(
-          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
-        )
-      })
+        .catch((err) => {
+          setLoadingError(
+            'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+          )
+        })
+    }
   }
 
   function getSavedMovies() {
     mainApi
-      .getMovies()
+      .getUserMovies()
       .then((data) => {
         const savedArray = data.map((item) => {
           return { ...item, id: toString(item.movieId) }
@@ -269,7 +262,7 @@ const App = () => {
 
   function addMovie(movie) {
     mainApi
-      .createMovie(movie)
+      .addMovies(movie)
       .then((res) => {
         setSavedMovies([...savedMovies, { ...res, id: res.movieId }])
       })
