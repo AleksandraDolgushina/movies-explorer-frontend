@@ -23,27 +23,27 @@ const App = () => {
   const [loggedIn, setLoggedIn] = React.useState(false)
   const history = useHistory()
   let location = useLocation()
+  
+  React.useEffect( () => {
+    checkToken()
+  }, [])
 
-  React.useEffect(() => {
-    const path = location.pathname
-    const token = localStorage.getItem('token')
-    if (token) {
-      mainApi
-        .checkToken(token)
-        .then((res) => {
-          if (res) {
-            setLoggedIn(true)
-            getCurrentUser()
-            history.push(path)
-          }
+  const checkToken = () => {
+    const jwt = localStorage.getItem('jwt')
+    if (jwt) {
+        mainApi.getContent(jwt)
+        .then( res => {
+          setLoggedIn(true)
+          getCurrentUser()
         })
         .catch((err) => {
           console.log(err)
-          localStorage.removeItem('token')
+          localStorage.removeItem('jwt')
           history.push('/')
         })
     }
-  }, [])
+  }
+
 
   function handleRegister({ name, email, password }) {
     if (!name || !email || !password) {
@@ -51,10 +51,8 @@ const App = () => {
     }
     mainApi
       .register(name, email, password)
-      .then((res) => {
-        if (res) {
-          handleLogin(email, password)
-        }
+      .then(() => {
+        history.push("/signin")
       })
       .catch((err) => {
         if (err.status === 409) {
@@ -71,12 +69,10 @@ const App = () => {
     mainApi
       .authorize(email, password)
       .then((res) => {
-        if (res.token) {
-          localStorage.setItem('jwt', res.token)
-          setLoggedIn(true)
-          getCurrentUser()
-          history.push('/movies')
-        }
+        localStorage.setItem('jwt', res.token)
+        setLoggedIn(true)
+        getCurrentUser()
+        history.push('/movies')
       })
       .catch((err) => {
         if (err.status === 400) {
