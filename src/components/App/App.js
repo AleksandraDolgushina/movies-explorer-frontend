@@ -18,7 +18,6 @@ import Popup from '../Popup/Popup'
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(false)
   const [loadingError, setLoadingError] = React.useState('')
-
   const [currentUser, setCurrentUser] = React.useState({})
   const [loggedIn, setLoggedIn] = React.useState(false)
   const history = useHistory()
@@ -30,7 +29,7 @@ const App = () => {
 
   const checkToken = () => {
     const jwt = localStorage.getItem('jwt')
-    if (jwt) {
+      if (jwt) {
         mainApi.getContent(jwt)
         .then( res => {
           setLoggedIn(true)
@@ -49,11 +48,9 @@ const App = () => {
     if (!name || !email || !password) {
       return
     }
-    console.log( name, email, password )
     mainApi
       .register(name, email, password)
       .then((res) => {
-        console.log(res)
         history.push("/signin")
       })
       .catch((err) => {
@@ -88,7 +85,7 @@ const App = () => {
   }
 
   function getCurrentUser() {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('jwt')
     mainApi
       .getCurrentUser(token)
       .then((res) => {
