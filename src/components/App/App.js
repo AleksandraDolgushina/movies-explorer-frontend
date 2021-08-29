@@ -28,25 +28,38 @@ const App = () => {
   const history = useHistory()
   let location = useLocation()
   
-  React.useEffect( () => {
-    checkToken()
-  }, [])
+  // React.useEffect( () => {
+  //   checkToken()
+  // }, [])
 
-  const checkToken = () => {
-    const jwt = localStorage.getItem('jwt')
-      if (jwt) {
-        mainApi.getContent(jwt)
-        .then( res => {
-          setLoggedIn(true)
-          //getCurrentUser()
-        })
-        .catch((err) => {
-          console.log(err)
-          localStorage.removeItem('jwt')
-          history.push('/')
-        })
-    }
-  }
+  // const checkToken = () => {
+  //   const jwt = localStorage.getItem('jwt')
+  //   if (jwt) {
+  //     mainApi.getContent(jwt)
+  //     .then( res => {
+  //       setLoggedIn(true)
+  //       //getCurrentUser()
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       localStorage.removeItem('jwt')
+  //       history.push('/')
+  //     })
+  //   }
+  // }
+
+  React.useEffect(() => {
+    Promise.all([mainApi.getUser(), mainApi.getUserMovies()])
+      .then(([ userData, userMovies ]) => {
+        setCurrentUser(userData)
+        setSavedMovies(userMovies)
+      })
+      .catch((err) => {
+        setLoadingError(
+          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+        )
+      })
+  }, []);
 
   function handleRegister({ name, email, password }) {
     if (!name || !email || !password) {
