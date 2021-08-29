@@ -69,6 +69,7 @@ class MainApi {
         })
         .then(this._handleResponse)
     };
+    
     logout({ email }) {
         return fetch(`${this._address}/signout`, {
           method: 'POST',
@@ -96,7 +97,29 @@ class MainApi {
           headers: this._headers,
           body: JSON.stringify({ email, password }),
         }).then(this._handleResponse);
-      };
+    };
+
+    checkToken(token) {
+        return this._getResponseData(
+          fetch(`${this._address}/users/me`, {
+            headers: {
+              ...this._headers,
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        )
+    }
+
+    getCurrentUser(token) {
+        return this._getResponseData(
+          fetch(`${this._address}/users/me`, {
+            headers: {
+              ...this._headers,
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        )
+    }
 
     getContent = (token) => {
         return fetch(`${this._address}/users/me`, {
