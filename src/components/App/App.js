@@ -333,7 +333,7 @@ const App = () => {
       .register(name, email, password)
       .then((res) => {
         if (res) {
-          login(email, password)
+          handleLogin(email, password)
         }
       })
       .catch((err) => {
@@ -347,7 +347,10 @@ const App = () => {
       })
   }
 
-  function login(email, password) {
+  function handleLogin(email, password) {
+    if (!email || !password) {
+      return
+    }
     mainApi
       .authorize(email, password)
       .then((res) => {
@@ -367,13 +370,6 @@ const App = () => {
           setIsInfoPopupOpen(true)
         }
       })
-  }
-
-  function handleLogin({ email, password }) {
-    if (!email || !password) {
-      return
-    }
-    login(email, password)
   }
 
   function getCurrentUser() {
