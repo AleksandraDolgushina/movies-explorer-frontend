@@ -152,18 +152,21 @@ const App = () => {
   }
 
   function getInitialMovies() {
-    moviesApi
-      .getMovies()
-      .then((data) => {
-        localStorage.setItem('initialMovies', JSON.stringify(data))
-        setInitialMovies(data)
-      })
-      .catch((err) => {
-        localStorage.removeItem('initialMovies')
-        setLoadingError(
-          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-        )
-      })
+    if (loggedIn) {
+      setIsLoading(true);
+      moviesApi
+        .getMovies()
+        .then((data) => {
+          localStorage.setItem('initialMovies', JSON.stringify(data))
+          setInitialMovies(data)
+        })
+        .catch((err) => {
+          localStorage.removeItem('initialMovies')
+          setLoadingError(
+            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+          )
+        })
+    }
   }
 
   function getSavedMovies() {
