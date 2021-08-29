@@ -87,6 +87,7 @@ const App = () => {
       .then((res) => {
         localStorage.setItem('jwt', res.token)
         setLoggedIn(true)
+        console.log('jwt', res.token)
         //getCurrentUser()
         history.push('/movies')
       })
