@@ -347,7 +347,7 @@ const App = () => {
       })
   }
 
-  function handleLogin(email, password) {
+  function handleLogin({email, password}) {
     if (!email || !password) {
       return
     }
