@@ -30,25 +30,25 @@ const App = () => {
   const [textPopup, setTextPopup] = React.useState('')
   let location = useLocation()
   
-  React.useEffect( () => {
-    checkToken()
-  }, [])
+  // React.useEffect( () => {
+  //   checkToken()
+  // }, [])
 
-  const checkToken = () => {
-    const jwt = localStorage.getItem('jwt')
-    if (jwt) {
-      mainApi.getContent(jwt)
-      .then( res => {
-        setLoggedIn(true)
-        setCurrentUser(res)
-      })
-      .catch((err) => {
-        console.log(err)
-        localStorage.removeItem('jwt')
-        history.push('/')
-      })
-    }
-  }
+  // const checkToken = () => {
+  //   const jwt = localStorage.getItem('jwt')
+  //   if (jwt) {
+  //     mainApi.getContent(jwt)
+  //     .then( res => {
+  //       setLoggedIn(true)
+  //       setCurrentUser(res)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       localStorage.removeItem('jwt')
+  //       history.push('/')
+  //     })
+  //   }
+  // }
 
   React.useEffect(() => {
     Promise.all([mainApi.getUser(), mainApi.getUserMovies()])
@@ -58,7 +58,7 @@ const App = () => {
       })
       .catch((err) => {
         setLoadingError(
-          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
         )
       })
   }, []);
