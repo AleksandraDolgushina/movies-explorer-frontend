@@ -26,6 +26,8 @@ const App = () => {
   const [filterSavedMovies, setFilterSavedMovies] = React.useState([])
   const [query, setQuery] = React.useState('')
   const history = useHistory()
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false)
+  const [textPopup, setTextPopup] = React.useState('')
   let location = useLocation()
   
   React.useEffect( () => {
@@ -202,8 +204,7 @@ const App = () => {
 
   React.useEffect(() => {
     if (loggedIn) {
-      getInitialMovies()
-      getSavedMovies()
+      history.push('/')
     }
   }, [loggedIn])
 
@@ -288,8 +289,6 @@ const App = () => {
     localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
   }, [savedMovies])
 
-  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false)
-  const [textPopup, setTextPopup] = React.useState('')
 
   function onClosePopup() {
     setIsInfoPopupOpen(false)
