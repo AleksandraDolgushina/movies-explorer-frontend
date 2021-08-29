@@ -80,15 +80,16 @@ const App = () => {
           setIsInfoPopupOpen(true)
         }
       })
-  }
-
-  function handleLogin({email, password}) {
-    mainApi
+    }
+    
+    function handleLogin({email, password}) {
+      mainApi
       .authorize(email, password)
       .then((res) => {
         setCurrentUser(res)
         setLoggedIn(true)
-        //getCurrentUser()
+        localStorage.setItem('jwt', res.token);
+        getCurrentUser()
         history.push('/movies')
       })
       .catch((err) => {
@@ -102,20 +103,20 @@ const App = () => {
       })
   }
 
-  // function getCurrentUser() {
-  //   const token = localStorage.getItem('jwt')
-  //   mainApi
-  //     .getContent(token)
-  //     .then((res) => {
-  //       if (res) {
-  //         setCurrentUser(res)
-  //         localStorage.setItem('currentUser', JSON.stringify(res))
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
+  function getCurrentUser() {
+    const token = localStorage.getItem('jwt')
+    mainApi
+      .getContent(token)
+      .then((res) => {
+        if (res) {
+          setCurrentUser(res)
+          localStorage.setItem('currentUser', JSON.stringify(res))
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   function handleSaveProfile(data) {
     mainApi
@@ -175,23 +176,23 @@ const App = () => {
       })
   }
 
-  // function getSavedMovies() {
-  //   mainApi
-  //     .getUserMovies()
-  //     .then((data) => {
-  //       const savedArray = data.map((item) => {
-  //         return { ...item, id: toString(item.movieId) }
-  //       })
-  //       localStorage.setItem('savedMovies', JSON.stringify(savedArray))
-  //       setSavedMovies(savedArray)
-  //     })
-  //     .catch((err) => {
-  //       localStorage.removeItem('savedMovies')
-  //       setLoadingError(
-  //         'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
-  //       )
-  //     })
-  // }
+  function getSavedMovies() {
+    mainApi
+      .getUserMovies()
+      .then((data) => {
+        const savedArray = data.map((item) => {
+          return { ...item, id: toString(item.movieId) }
+        })
+        localStorage.setItem('savedMovies', JSON.stringify(savedArray))
+        setSavedMovies(savedArray)
+      })
+      .catch((err) => {
+        localStorage.removeItem('savedMovies')
+        setLoadingError(
+          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+        )
+      })
+  }
 
   React.useEffect(() => {
     const initial = JSON.parse(localStorage.getItem('initialMovies'))
@@ -205,14 +206,14 @@ const App = () => {
     if (saved) {
       setSavedMovies(saved)
     } else {
-      //getSavedMovies()
+      getSavedMovies()
     }
   }, [])
 
   React.useEffect(() => {
     if (loggedIn) {
       getInitialMovies()
-      //getSavedMovies()
+      getSavedMovies()
     }
   }, [loggedIn])
 
