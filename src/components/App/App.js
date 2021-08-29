@@ -40,7 +40,7 @@ const App = () => {
       mainApi.getContent(jwt)
       .then( res => {
         setLoggedIn(true)
-        //getCurrentUser()
+        setCurrentUser(res)
       })
       .catch((err) => {
         console.log(err)
@@ -90,6 +90,7 @@ const App = () => {
       .then((res) => {
         setCurrentUser(res)
         setLoggedIn(true)
+        localStorage.setItem('jwt', res.token);
         //getCurrentUser()
         history.push('/movies')
       })
