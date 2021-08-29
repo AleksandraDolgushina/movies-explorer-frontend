@@ -28,25 +28,25 @@ const App = () => {
   const history = useHistory()
   let location = useLocation()
   
-  // React.useEffect( () => {
-  //   checkToken()
-  // }, [])
+  React.useEffect( () => {
+    checkToken()
+  }, [])
 
-  // const checkToken = () => {
-  //   const jwt = localStorage.getItem('jwt')
-  //   if (jwt) {
-  //     mainApi.getContent(jwt)
-  //     .then( res => {
-  //       setLoggedIn(true)
-  //       //getCurrentUser()
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       localStorage.removeItem('jwt')
-  //       history.push('/')
-  //     })
-  //   }
-  // }
+  const checkToken = () => {
+    const jwt = localStorage.getItem('jwt')
+    if (jwt) {
+      mainApi.getContent(jwt)
+      .then( res => {
+        setLoggedIn(true)
+        //getCurrentUser()
+      })
+      .catch((err) => {
+        console.log(err)
+        localStorage.removeItem('jwt')
+        history.push('/')
+      })
+    }
+  }
 
   React.useEffect(() => {
     Promise.all([mainApi.getUser(), mainApi.getUserMovies()])
@@ -89,7 +89,7 @@ const App = () => {
         setCurrentUser(res)
         setLoggedIn(true)
         localStorage.setItem('jwt', res.token);
-        getCurrentUser()
+        //getCurrentUser()
         history.push('/movies')
       })
       .catch((err) => {
@@ -103,20 +103,20 @@ const App = () => {
       })
   }
 
-  function getCurrentUser() {
-    const token = localStorage.getItem('jwt')
-    mainApi
-      .getContent(token)
-      .then((res) => {
-        if (res) {
-          setCurrentUser(res)
-          localStorage.setItem('currentUser', JSON.stringify(res))
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  // function getCurrentUser() {
+  //   const token = localStorage.getItem('jwt')
+  //   mainApi
+  //     .getContent(token)
+  //     .then((res) => {
+  //       if (res) {
+  //         setCurrentUser(res)
+  //         localStorage.setItem('currentUser', JSON.stringify(res))
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
 
   function handleSaveProfile(data) {
     mainApi
