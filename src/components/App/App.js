@@ -199,14 +199,14 @@ const App = () => {
     if (saved) {
       setSavedMovies(saved)
     } else {
-      getSavedMovies()
+      //getSavedMovies()
     }
   }, [])
 
   React.useEffect(() => {
     if (loggedIn) {
       getInitialMovies()
-      getSavedMovies()
+      //getSavedMovies()
     }
   }, [loggedIn])
 
