@@ -325,7 +325,7 @@ const App = () => {
             loadingError={loadingError}
             component={Movies}
             savedMovies={false}
-            movies={initialMovies}
+            movies={filterMovies}
             onSubmitSearch={onSubmitSearch}
             onLikeClick={onLikeClick}
             isSavedMovie={isSavedMovie}
