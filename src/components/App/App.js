@@ -305,7 +305,7 @@ const App = () => {
   let location = useLocation()
 
   React.useEffect(() => {
-    const path = location.pathname
+    //const path = location.pathname
     const token = localStorage.getItem('jwt')
     if (token) {
       mainApi
@@ -314,7 +314,7 @@ const App = () => {
           if (res) {
             setLoggedIn(true)
             getCurrentUser()
-            history.push(path)
+            //history.push(path)
           }
         })
         .catch((err) => {

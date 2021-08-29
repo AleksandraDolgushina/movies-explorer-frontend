@@ -118,19 +118,6 @@ class MainApi {
             },
           }).then(this._handleResponse);
     }
-
-    getContent = (token) => {
-        return fetch(`${this._address}/users/me`, {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          }
-        }).then(this._handleResponse);
-    }
-
 }
 
 const mainApi = new MainApi({
