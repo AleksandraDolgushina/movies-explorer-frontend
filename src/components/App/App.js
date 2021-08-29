@@ -68,6 +68,7 @@ const App = () => {
     mainApi
       .register(name, email, password)
       .then((res) => {
+        setCurrentUser(res);
         history.push("/signin")
       })
       .catch((err) => {
@@ -85,9 +86,8 @@ const App = () => {
     mainApi
       .authorize(email, password)
       .then((res) => {
-        localStorage.setItem('jwt', res.token)
+        setCurrentUser(res)
         setLoggedIn(true)
-        console.log('jwt', res.token)
         //getCurrentUser()
         history.push('/movies')
       })
@@ -151,14 +151,24 @@ const App = () => {
     history.push('/')
   }
 
-
   function getInitialMovies() {
     moviesApi
       .getMovies()
       .then((data) => {
-        localStorage.setItem('initialMovies', JSON.stringify(data))
+        const initialArray = data.map((item) => {
+          const imageURL = item.image ? item.image.url : ''
+          return {
+            ...item,
+            image: `https://api.nomoreparties.co${imageURL}`,
+            trailer: item.trailerLink,
+          }
+        })
+
+        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
+        setInitialMovies(initialArray)
       })
       .catch((err) => {
+        localStorage.removeItem('initialMovies')
         setLoadingError(
           'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
         )
@@ -315,7 +325,7 @@ const App = () => {
             loadingError={loadingError}
             component={Movies}
             savedMovies={false}
-            movies={filterMovies}
+            movies={initialMovies}
             onSubmitSearch={onSubmitSearch}
             onLikeClick={onLikeClick}
             isSavedMovie={isSavedMovie}

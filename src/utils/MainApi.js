@@ -40,7 +40,7 @@ class MainApi {
     };
 
     addMovies(data) {
-        return fetch(`${this._address}/cards`, {
+        return fetch(`${this._address}/movies`, {
             method: 'POST',
             credentials: 'include',
             headers: this._headers,
@@ -67,9 +67,7 @@ class MainApi {
             credentials: 'include',
             headers: this._headers,
         })
-        .then(response => response.ok
-            ? Promise.resolve('success')
-            : Promise.reject(`Ошибка ${response.status}`))
+        .then(this._handleResponse)
     };
     logout({ email }) {
         return fetch(`${this._address}/signout`, {
