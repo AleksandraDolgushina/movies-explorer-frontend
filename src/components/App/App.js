@@ -333,7 +333,7 @@ const App = () => {
       .register(name, email, password)
       .then((res) => {
         if (res) {
-          handleLogin(email, password)
+          history.push('/signin')
         }
       })
       .catch((err) => {
