@@ -151,23 +151,23 @@ const App = () => {
       })
   }
 
-  function getSavedMovies() {
-    mainApi
-      .getUserMovies()
-      .then((data) => {
-        const savedArray = data.map((item) => {
-          return { ...item, id: toString(item.movieId) }
-        })
-        localStorage.setItem('savedMovies', JSON.stringify(savedArray))
-        setSavedMovies(savedArray)
-      })
-      .catch((err) => {
-        localStorage.removeItem('savedMovies')
-        setLoadingError(
-          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
-        )
-      })
-  }
+  // function getSavedMovies() {
+  //   mainApi
+  //     .getUserMovies()
+  //     .then((data) => {
+  //       const savedArray = data.map((item) => {
+  //         return { ...item, id: toString(item.movieId) }
+  //       })
+  //       localStorage.setItem('savedMovies', JSON.stringify(savedArray))
+  //       setSavedMovies(savedArray)
+  //     })
+  //     .catch((err) => {
+  //       localStorage.removeItem('savedMovies')
+  //       setLoadingError(
+  //         'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+  //       )
+  //     })
+  // }
 
   React.useEffect(() => {
     const initial = JSON.parse(localStorage.getItem('initialMovies'))
@@ -181,14 +181,14 @@ const App = () => {
     if (saved) {
       setSavedMovies(saved)
     } else {
-      getSavedMovies()
+      //getSavedMovies()
     }
   }, [])
 
   React.useEffect(() => {
     if (loggedIn) {
       getInitialMovies()
-      getSavedMovies()
+      //getSavedMovies()
     }
   }, [loggedIn])
 
