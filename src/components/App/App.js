@@ -88,7 +88,6 @@ const App = () => {
       .then((res) => {
         setCurrentUser(res)
         setLoggedIn(true)
-        localStorage.setItem('jwt', res.token);
         //getCurrentUser()
         history.push('/movies')
       })
@@ -156,22 +155,13 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => {
-        const initialArray = data.map((item) => {
-          const imageURL = item.image ? item.image.url : ''
-          return {
-            ...item,
-            image: `https://api.nomoreparties.co${imageURL}`,
-            trailer: item.trailerLink,
-          }
-        })
-
-        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
-        setInitialMovies(initialArray)
+        localStorage.setItem('initialMovies', JSON.stringify(data))
+        setInitialMovies(data)
       })
       .catch((err) => {
         localStorage.removeItem('initialMovies')
         setLoadingError(
-          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
         )
       })
   }
@@ -189,7 +179,7 @@ const App = () => {
       .catch((err) => {
         localStorage.removeItem('savedMovies')
         setLoadingError(
-          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
         )
       })
   }
