@@ -205,7 +205,8 @@ const App = () => {
 
   React.useEffect(() => {
     if (loggedIn) {
-      history.push('/')
+      getInitialMovies()
+      getSavedMovies()
     }
   }, [loggedIn])
 
