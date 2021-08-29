@@ -333,7 +333,7 @@ const App = () => {
       .register(name, email, password)
       .then((res) => {
         if (res) {
-          handleLogin (email, password)
+          history.push('/signin')
         }
       })
       .catch((err) => {
@@ -357,7 +357,7 @@ const App = () => {
         if (res.token) {
           localStorage.setItem('jwt', res.token)
           setLoggedIn(true)
-          getCurrentUser()
+          //getCurrentUser()
           history.push('/movies')
         }
       })
