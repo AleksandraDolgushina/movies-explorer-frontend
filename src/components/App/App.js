@@ -20,6 +20,11 @@ const App = () => {
   const [loadingError, setLoadingError] = React.useState('')
   const [currentUser, setCurrentUser] = React.useState({})
   const [loggedIn, setLoggedIn] = React.useState(false)
+  const [initialMovies, setInitialMovies] = React.useState([])
+  const [savedMovies, setSavedMovies] = React.useState([])
+  const [filterMovies, setFilterMovies] = React.useState([])
+  const [filterSavedMovies, setFilterSavedMovies] = React.useState([])
+  const [query, setQuery] = React.useState('')
   const history = useHistory()
   let location = useLocation()
   
@@ -42,7 +47,6 @@ const App = () => {
         })
     }
   }
-
 
   function handleRegister({ name, email, password }) {
     if (!name || !email || !password) {
@@ -133,26 +137,18 @@ const App = () => {
     history.push('/')
   }
 
-  const [initialMovies, setInitialMovies] = React.useState([])
-  const [savedMovies, setSavedMovies] = React.useState([])
-  const [filterMovies, setFilterMovies] = React.useState([])
-  const [filterSavedMovies, setFilterSavedMovies] = React.useState([])
-  const [query, setQuery] = React.useState('')
 
   function getInitialMovies() {
-    if (loggedIn) {
-      setIsLoading(true);
-      moviesApi
-        .getMovies()
-        .then((data) => {
-          localStorage.setItem('initialMovies', JSON.stringify(data))
-        })
-        .catch((err) => {
-          setLoadingError(
-            'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
-          )
-        })
-    }
+    moviesApi
+      .getMovies()
+      .then((data) => {
+        localStorage.setItem('initialMovies', JSON.stringify(data))
+      })
+      .catch((err) => {
+        setLoadingError(
+          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+        )
+      })
   }
 
   function getSavedMovies() {
