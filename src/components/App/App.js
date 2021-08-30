@@ -511,7 +511,7 @@ const App = () => {
   }
 
   function filter(data, query) {
-    console.log(query)
+    console.log(data)
     if (query) {
       const regex = new RegExp(query, 'gi')
       const filterData = data.filter((item) => {
