@@ -488,11 +488,7 @@ const App = () => {
     
     React.useEffect(() => {
       const initial = JSON.parse(localStorage.getItem('initialMovies'))
-      if (initial) {
-        setInitialMovies(initial)
-      } else {
-        getInitialMovies()
-      }
+      initial && setInitialMovies(initial)
   
       const saved = JSON.parse(localStorage.getItem('savedMovies'))
       if (saved) {
