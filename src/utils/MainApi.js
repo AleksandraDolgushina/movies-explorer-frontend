@@ -19,18 +19,26 @@ class MainApi {
     ;}
 
     getUserMovies() {
+        const token = localStorage.getItem('token')
         return fetch(`${this._address}/movies`, {
             credentials: 'include',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`,
+            },
         })
         .then(this._handleResponse)
     };
 
     editUser(data) {
+        const token = localStorage.getItem('token')
         return fetch(`${this._address}/users/me`, {
             method: 'PATCH',
             credentials: 'include',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify({
                 name: data.name,
                 email: data.email
@@ -40,10 +48,14 @@ class MainApi {
     };
 
     addMovies(data) {
+        const token = localStorage.getItem('token')
         return fetch(`${this._address}/movies`, {
             method: 'POST',
             credentials: 'include',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`,
+            },
             body: JSON.stringify({
                 country: data.country,
                 director: data.director,
@@ -62,10 +74,14 @@ class MainApi {
     };
 
     deleteMovies(id) {
+        const token = localStorage.getItem('token')
         return fetch(`${this._address}/movies/${id}`, {
             method: 'DELETE',
             credentials: 'include',
-            headers: this._headers,
+            headers: {
+                ...this._headers,
+                Authorization: `Bearer ${token}`,
+            },
         })
         .then(this._handleResponse)
     };
@@ -102,19 +118,20 @@ class MainApi {
     checkToken(token) {
         return fetch(`${this._address}/users/me`, {
             headers: {
-                credentials: 'include',
-                ...this._headers,
-                Authorization: `Bearer ${token}`,
+            credentials: 'include',
+              ...this._headers,
+              Authorization: `Bearer ${token}`,
             },
           }).then(this._handleResponse);
     }
 
-    getCurrentUser() {
+    getCurrentUser(token) {
         return fetch(`${this._address}/users/me`, {
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
           }).then(this._handleResponse);
     }
