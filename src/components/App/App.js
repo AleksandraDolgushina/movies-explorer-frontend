@@ -502,12 +502,12 @@ const App = () => {
       }
     }, [])
 
-  React.useEffect(() => {
-    if (loggedIn) {
-      getInitialMovies()
-      getSavedMovies()
-    }
-  }, [loggedIn])
+  // React.useEffect(() => {
+  //   if (loggedIn) {
+  //     getInitialMovies()
+  //     getSavedMovies()
+  //   }
+  // }, [loggedIn])
 
   function isSavedMovie(movie) {
     return savedMovies.some((item) => item.id === movie.id)
