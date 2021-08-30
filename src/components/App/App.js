@@ -462,18 +462,17 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => {
-        const initialArray = data.map((item) => {
-          const imageURL = item.image ? item.image.url : ''
-          return {
-            ...item,
-            image: `https://api.nomoreparties.co${imageURL}`,
-            trailer: item.trailerLink,
-          }
-        })
+        // const initialArray = data.map((item) => {
+        //   const imageURL = item.image ? item.image.url : ''
+        //   return {
+        //     ...item,
+        //     image: `https://api.nomoreparties.co${imageURL}`,
+        //     trailer: item.trailerLink,
+        //   }
+        // })
 
-        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
-        console.log(initialArray)
-        setInitialMovies(initialArray)
+        localStorage.setItem('initialMovies', JSON.stringify(data))
+        setInitialMovies(data)
       })
       .catch((err) => {
         setLoadingError(
