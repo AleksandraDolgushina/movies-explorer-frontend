@@ -19,7 +19,7 @@ class MainApi {
     ;}
 
     getUserMovies() {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/movies`, {
             credentials: 'include',
             headers: {
@@ -31,7 +31,7 @@ class MainApi {
     };
 
     editUser(data) {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/users/me`, {
             method: 'PATCH',
             credentials: 'include',
@@ -48,7 +48,7 @@ class MainApi {
     };
 
     addMovies(data) {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/movies`, {
             method: 'POST',
             credentials: 'include',
@@ -74,7 +74,7 @@ class MainApi {
     };
 
     deleteMovies(id) {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/movies/${id}`, {
             method: 'DELETE',
             credentials: 'include',
@@ -125,7 +125,8 @@ class MainApi {
           }).then(this._handleResponse);
     }
 
-    getCurrentUser(token) {
+    getCurrentUser() {
+        const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/users/me`, {
             credentials: 'include',
             headers: {
