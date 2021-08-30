@@ -471,7 +471,7 @@ const App = () => {
           }
         })
 
-        localStorage.setItem('movies', JSON.stringify(initialArray))
+        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
         setInitialMovies(initialArray)
       })
       .catch((err) => {
