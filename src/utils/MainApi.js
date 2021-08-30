@@ -102,8 +102,9 @@ class MainApi {
     checkToken(token) {
         return fetch(`${this._address}/users/me`, {
             headers: {
-              ...this._headers,
-              Authorization: `Bearer ${token}`,
+                credentials: 'include',
+                ...this._headers,
+                Authorization: `Bearer ${token}`,
             },
           }).then(this._handleResponse);
     }
