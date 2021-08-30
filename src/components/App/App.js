@@ -462,6 +462,7 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => {
+        console.log(data)
         const initialArray = data.map((item) => {
           const imageURL = item.image ? item.image.url : ''
           return {
