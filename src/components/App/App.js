@@ -313,7 +313,7 @@ const App = () => {
         .then((res) => {
           if (res) {
             setLoggedIn(true)
-            getCurrentUser()
+            //getCurrentUser()
             history.push(path)
           }
         })
@@ -357,7 +357,7 @@ const App = () => {
         if (res.token) {
           localStorage.setItem('jwt', res.token)
           setLoggedIn(true)
-          getCurrentUser()
+          //getCurrentUser()
           history.push('/movies')
         }
       })
@@ -372,20 +372,33 @@ const App = () => {
       })
   }
 
-  function getCurrentUser() {
-    const token = localStorage.getItem('jwt')
-    mainApi
-      .getCurrentUser(token)
-      .then((res) => {
-        if (res) {
-          setCurrentUser(res)
-          localStorage.setItem('currentUser', JSON.stringify(res))
-        }
+    React.useEffect(() => {
+    Promise.all([mainApi.getUser(), mainApi.getUserMovies()])
+      .then(([ userData, userMovies ]) => {
+        setCurrentUser(userData)
+        setSavedMovies(userMovies)
       })
       .catch((err) => {
-        console.log(err)
+        setLoadingError(
+          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+        )
       })
-  }
+  }, []);
+
+  // function getCurrentUser() {
+  //   const token = localStorage.getItem('jwt')
+  //   mainApi
+  //     .getCurrentUser(token)
+  //     .then((res) => {
+  //       if (res) {
+  //         setCurrentUser(res)
+  //         localStorage.setItem('currentUser', JSON.stringify(res))
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
 
   function handleSaveProfile(data) {
     mainApi
@@ -431,7 +444,6 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => {
-        console.log(data)
         const initialArray = data.map((item) => {
           const imageURL = item.image ? item.image.url : ''
           return {
@@ -453,23 +465,23 @@ const App = () => {
       })
   }
 
-  function getSavedMovies() {
-    mainApi
-      .getUserMovies()
-      .then((data) => {
-        const savedArray = data.map((item) => {
-          return { ...item, id: toString(item.movieId) }
-        })
-        localStorage.setItem('savedMovies', JSON.stringify(savedArray))
-        setSavedMovies(savedArray)
-      })
-      .catch((err) => {
-        localStorage.removeItem('savedMovies')
-        setLoadingError(
-          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
-        )
-      })
-  }
+  // function getSavedMovies() {
+  //   mainApi
+  //     .getUserMovies()
+  //     .then((data) => {
+  //       const savedArray = data.map((item) => {
+  //         return { ...item, id: toString(item.movieId) }
+  //       })
+  //       localStorage.setItem('savedMovies', JSON.stringify(savedArray))
+  //       setSavedMovies(savedArray)
+  //     })
+  //     .catch((err) => {
+  //       localStorage.removeItem('savedMovies')
+  //       setLoadingError(
+  //         'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+  //       )
+  //     })
+  // }
 
   React.useEffect(() => {
     const initial = JSON.parse(localStorage.getItem('initialMovies'))
@@ -483,16 +495,16 @@ const App = () => {
     if (saved) {
       setSavedMovies(saved)
     } else {
-      getSavedMovies()
+      //getSavedMovies()
     }
   }, [])
 
-  React.useEffect(() => {
-    if (loggedIn) {
-      getInitialMovies()
-      getSavedMovies()
-    }
-  }, [loggedIn])
+  // React.useEffect(() => {
+  //   if (loggedIn) {
+  //     getInitialMovies()
+  //     getSavedMovies()
+  //   }
+  // }, [loggedIn])
 
   function isSavedMovie(movie) {
     return savedMovies.some((item) => item.id === movie.id)
