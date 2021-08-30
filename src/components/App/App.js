@@ -383,6 +383,7 @@ const App = () => {
     Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
       .then(([ userData, userMovies ]) => {
         setCurrentUser(userData)
+        setSavedMovies(userMovies)
         setLoggedIn(true)
       })
       .catch((err) => {
@@ -462,17 +463,17 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => {
-        // const initialArray = data.map((item) => {
-        //   const imageURL = item.image ? item.image.url : ''
-        //   return {
-        //     ...item,
-        //     image: `https://api.nomoreparties.co${imageURL}`,
-        //     trailer: item.trailerLink,
-        //   }
-        // })
+        const initialArray = data.map((item) => {
+          const imageURL = item.image ? item.image.url : ''
+          return {
+            ...item,
+            image: `https://api.nomoreparties.co${imageURL}`,
+            trailer: item.trailerLink,
+          }
+        })
 
-        localStorage.setItem('initialMovies', JSON.stringify(data))
-        setInitialMovies(data)
+        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
+        setInitialMovies(initialArray)
       })
       .catch((err) => {
         setLoadingError(
