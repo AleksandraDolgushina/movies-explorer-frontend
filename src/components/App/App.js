@@ -528,6 +528,7 @@ const App = () => {
   }
 
   function onSubmitSearch(query) {
+    console.log(query)
     setIsLoading(true)
     setTimeout(() => {
       setQuery(query)
