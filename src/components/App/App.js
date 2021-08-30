@@ -463,6 +463,7 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => {
+        console.log(data)
         const initialArray = data.map((item) => {
           const imageURL = item.image ? item.image.url : ''
           return {
@@ -515,7 +516,6 @@ const App = () => {
     if (query) {
       const regex = new RegExp(query, 'gi')
       const filterData = data.filter((item) => {
-        console.log(item)
         return regex.test(item.nameRU) || regex.test(item.nameEN)
       })
       
