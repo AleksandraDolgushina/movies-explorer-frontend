@@ -376,7 +376,7 @@ const App = () => {
     Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
       .then(([ userData, userMovies ]) => {
         setCurrentUser(userData)
-        setSavedMovies(userMovies)
+        setLoggedIn(true)
       })
       .catch((err) => {
         setLoadingError(
@@ -384,6 +384,22 @@ const App = () => {
         )
       })
   }, []);
+
+  React.useEffect(() => {
+    const initial = JSON.parse(localStorage.getItem('initialMovies'))
+    if (initial) {
+      setInitialMovies(initial)
+    } else {
+      getInitialMovies()
+    }
+
+    const saved = JSON.parse(localStorage.getItem('savedMovies'))
+    if (saved) {
+      setSavedMovies(saved)
+    } else {
+      getSavedMovies()
+    }
+  }, [])
 
   // function getCurrentUser() {
   //   const token = localStorage.getItem('jwt')
@@ -453,55 +469,38 @@ const App = () => {
           }
         })
 
-        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
+        localStorage.setItem('movies', JSON.stringify(initialArray))
         setInitialMovies(initialArray)
       })
       .catch((err) => {
-        localStorage.removeItem('initialMovies')
         setLoadingError(
           'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
         )
       })
   }
 
-  // function getSavedMovies() {
-  //   mainApi
-  //     .getUserMovies()
-  //     .then((data) => {
-  //       const savedArray = data.map((item) => {
-  //         return { ...item, id: toString(item.movieId) }
-  //       })
-  //       localStorage.setItem('savedMovies', JSON.stringify(savedArray))
-  //       setSavedMovies(savedArray)
-  //     })
-  //     .catch((err) => {
-  //       localStorage.removeItem('savedMovies')
-  //       setLoadingError(
-  //         'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
-  //       )
-  //     })
-  // }
-
-  React.useEffect(() => {
-    const initial = JSON.parse(localStorage.getItem('initialMovies'))
-    if (initial) {
-      setInitialMovies(initial)
-    } else {
-      getInitialMovies()
-    }
-
-    const saved = JSON.parse(localStorage.getItem('savedMovies'))
-    if (saved) {
-      setSavedMovies(saved)
-    } else {
-      //getSavedMovies()
-    }
-  }, [])
+  function getSavedMovies() {
+    mainApi
+      .getUserMovies()
+      .then((data) => {
+        const savedArray = data.map((item) => {
+          return { ...item, id: toString(item.movieId) }
+        })
+        localStorage.setItem('savedMovies', JSON.stringify(savedArray))
+        setSavedMovies(savedArray)
+      })
+      .catch((err) => {
+        localStorage.removeItem('savedMovies')
+        setLoadingError(
+          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+        )
+      })
+  }
 
   React.useEffect(() => {
     if (loggedIn) {
       getInitialMovies()
-      //getSavedMovies()
+      getSavedMovies()
     }
   }, [loggedIn])
 
@@ -509,23 +508,39 @@ const App = () => {
     return savedMovies.some((item) => item.id === movie.id)
   }
 
-  function filter(data, query) {
-    if (query) {
-      const regex = new RegExp(query, 'gi')
-      const filterData = data.filter((item) => {
-        return regex.test(item.nameRU) || regex.test(item.nameEN)
-      })
+  // function filter(data, query) {
+  //   if (query) {
+  //     const regex = new RegExp(query, 'gi')
+  //     const filterData = data.filter((item) => {
+  //       return regex.test(item.nameRU) || regex.test(item.nameEN)
+  //     })
 
-      if (filterData.length === 0) {
-        setLoadingError('Ничего не найдено')
-      } else {
-        setLoadingError('')
-      }
-      return filterData
-    }
-    return []
+  //     if (filterData.length === 0) {
+  //       setLoadingError('Ничего не найдено')
+  //     } else {
+  //       setLoadingError('')
+  //     }
+  //     return filterData
+  //   }
+  //   return []
+  // }
+
+  function filter(name) {
+    const MoviesList = JSON.parse(localStorage.getItem('movies'));
+    const lastSearchList = MoviesList.filter((movie) => {
+      const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
+      return (
+        movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
+        movie.description.toLowerCase().includes(name.toLowerCase()) ||
+        nameEN.toLowerCase().includes(name.toLowerCase())
+      );
+    });
+    setFilterMovies(lastSearchList);
+    localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
+    lastSearchList.length === 0 &&
+      setLoadingError('Ничего не найдено')
+    return lastSearchList;
   }
-
   function onSubmitSearch(query) {
     setIsLoading(true)
     setTimeout(() => {
