@@ -515,6 +515,7 @@ const App = () => {
     if (query) {
       const regex = new RegExp(query, 'gi')
       const filterData = data.filter((item) => {
+        console.log(item)
         return regex.test(item.nameRU) || regex.test(item.nameEN)
       })
       
