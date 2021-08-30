@@ -462,7 +462,6 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => {
-        console.log(data)
         const initialArray = data.map((item) => {
           const imageURL = item.image ? item.image.url : ''
           return {
@@ -473,6 +472,7 @@ const App = () => {
         })
 
         localStorage.setItem('initialMovies', JSON.stringify(initialArray))
+        console.log(initialArray)
         setInitialMovies(initialArray)
       })
       .catch((err) => {
