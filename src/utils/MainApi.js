@@ -109,13 +109,12 @@ class MainApi {
           }).then(this._handleResponse);
     }
 
-    getCurrentUser(token) {
+    getCurrentUser() {
         return fetch(`${this._address}/users/me`, {
             credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
             },
           }).then(this._handleResponse);
     }

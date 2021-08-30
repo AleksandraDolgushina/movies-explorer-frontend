@@ -355,7 +355,6 @@ const App = () => {
       .authorize(email, password)
       .then((res) => {
         if (res.token) {
-          localStorage.setItem('jwt', res.token)
           setLoggedIn(true)
           getCurrentUser()
           history.push('/movies')
@@ -373,9 +372,8 @@ const App = () => {
   }
 
   function getCurrentUser() {
-    const token = localStorage.getItem('jwt')
     mainApi
-      .getCurrentUser(token)
+      .getCurrentUser()
       .then((res) => {
         if (res) {
           setCurrentUser(res)
@@ -406,7 +404,6 @@ const App = () => {
   }
 
   function handleSignOut() {
-    localStorage.removeItem('jwt')
     localStorage.removeItem('currentUser')
     setLoggedIn(false)
     setCurrentUser({})
