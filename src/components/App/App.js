@@ -512,18 +512,18 @@ const App = () => {
   }
 
   function filter(data, query) {
-    console.log(data)
     if (query) {
       const regex = new RegExp(query, 'gi')
       const filterData = data.filter((item) => {
         return regex.test(item.nameRU) || regex.test(item.nameEN)
       })
-
+      
       if (filterData.length === 0) {
         setLoadingError('Ничего не найдено')
       } else {
         setLoadingError('')
       }
+      console.log(filterData)
       return filterData
     }
     return []
