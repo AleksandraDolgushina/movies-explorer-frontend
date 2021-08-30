@@ -431,8 +431,17 @@ const App = () => {
     moviesApi
       .getMovies()
       .then((data) => {
-        localStorage.setItem('initialMovies', JSON.stringify(data))
-        setInitialMovies(data)
+        const initialArray = data.map((item) => {
+          const imageURL = item.image ? item.image.url : ''
+          return {
+            ...item,
+            image: `https://api.nomoreparties.co${imageURL}`,
+            trailer: item.trailerLink,
+          }
+        })
+
+        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
+        setInitialMovies(initialArray)
       })
       .catch((err) => {
         localStorage.removeItem('initialMovies')
@@ -493,6 +502,7 @@ const App = () => {
       const filterData = data.filter((item) => {
         return regex.test(item.nameRU) || regex.test(item.nameEN)
       })
+      
       if (filterData.length === 0) {
         setLoadingError('Ничего не найдено')
       } else {
