@@ -285,43 +285,50 @@ const App = () => {
   //       setIsInfoPopupOpen(true)
   //     })
   // }
-
+  
   // React.useEffect(() => {
-  //   setFilterSavedMovies(filter(savedMovies, query))
-  //   localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
-  // }, [savedMovies])
-
-
-  // function onClosePopup() {
-  //   setIsInfoPopupOpen(false)
-  //   setTextPopup('')
-  // }
-  const [isLoading, setIsLoading] = React.useState(false)
-  const [loadingError, setLoadingError] = React.useState('')
-
+    //   setFilterSavedMovies(filter(savedMovies, query))
+    //   localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
+    // }, [savedMovies])
+    
+    
+    // function onClosePopup() {
+      //   setIsInfoPopupOpen(false)
+      //   setTextPopup('')
+      // }
+      const [isLoading, setIsLoading] = React.useState(false)
+      const [loadingError, setLoadingError] = React.useState('')
+      
   const [currentUser, setCurrentUser] = React.useState({})
   const [loggedIn, setLoggedIn] = React.useState(false)
   const history = useHistory()
+  const [initialMovies, setInitialMovies] = React.useState([])
+  const [savedMovies, setSavedMovies] = React.useState([])
+  const [filterMovies, setFilterMovies] = React.useState([])
+  const [filterSavedMovies, setFilterSavedMovies] = React.useState([])
+  const [query, setQuery] = React.useState('')
   let location = useLocation()
-
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false)
+  const [textPopup, setTextPopup] = React.useState('')
+      
   React.useEffect(() => {
     const path = location.pathname
     const token = localStorage.getItem('jwt')
     if (token) {
       mainApi
-        .checkToken(token)
-        .then((res) => {
-          if (res) {
-            setLoggedIn(true)
-            //getCurrentUser()
-            history.push(path)
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-          localStorage.removeItem('jwt')
-          history.push('/')
-        })
+      .checkToken(token)
+      .then((res) => {
+      if (res) {
+        setLoggedIn(true)
+        //getCurrentUser()
+        history.push(path)
+      }
+    })
+      .catch((err) => {
+        console.log(err)
+        localStorage.removeItem('jwt')
+        history.push('/')
+      })
     }
   }, [])
 
@@ -450,11 +457,6 @@ const App = () => {
     history.push('/')
   }
 
-  const [initialMovies, setInitialMovies] = React.useState([])
-  const [savedMovies, setSavedMovies] = React.useState([])
-  const [filterMovies, setFilterMovies] = React.useState([])
-  const [filterSavedMovies, setFilterSavedMovies] = React.useState([])
-  const [query, setQuery] = React.useState('')
 
   function getInitialMovies() {
     moviesApi
@@ -508,39 +510,23 @@ const App = () => {
     return savedMovies.some((item) => item.id === movie.id)
   }
 
-  // function filter(data, query) {
-  //   if (query) {
-  //     const regex = new RegExp(query, 'gi')
-  //     const filterData = data.filter((item) => {
-  //       return regex.test(item.nameRU) || regex.test(item.nameEN)
-  //     })
+  function filter(data, query) {
+    if (query) {
+      const regex = new RegExp(query, 'gi')
+      const filterData = data.filter((item) => {
+        return regex.test(item.nameRU) || regex.test(item.nameEN)
+      })
 
-  //     if (filterData.length === 0) {
-  //       setLoadingError('Ничего не найдено')
-  //     } else {
-  //       setLoadingError('')
-  //     }
-  //     return filterData
-  //   }
-  //   return []
-  // }
-
-  function filter(name) {
-    const MoviesList = JSON.parse(localStorage.getItem('movies'));
-    const lastSearchList = MoviesList.filter((movie) => {
-      const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
-      return (
-        movie.nameRU.toLowerCase().includes(name.toLowerCase()) ||
-        movie.description.toLowerCase().includes(name.toLowerCase()) ||
-        nameEN.toLowerCase().includes(name.toLowerCase())
-      );
-    });
-    setFilterMovies(lastSearchList);
-    localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
-    lastSearchList.length === 0 &&
-      setLoadingError('Ничего не найдено')
-    return lastSearchList;
+      if (filterData.length === 0) {
+        setLoadingError('Ничего не найдено')
+      } else {
+        setLoadingError('')
+      }
+      return filterData
+    }
+    return []
   }
+
   function onSubmitSearch(query) {
     setIsLoading(true)
     setTimeout(() => {
@@ -602,8 +588,6 @@ const App = () => {
     localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
   }, [savedMovies])
 
-  const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false)
-  const [textPopup, setTextPopup] = React.useState('')
 
   function onClosePopup() {
     setIsInfoPopupOpen(false)
