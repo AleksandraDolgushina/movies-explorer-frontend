@@ -373,7 +373,7 @@ const App = () => {
   }
 
     React.useEffect(() => {
-    Promise.all([mainApi.getUser(), mainApi.getUserMovies()])
+    Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
       .then(([ userData, userMovies ]) => {
         setCurrentUser(userData)
         setSavedMovies(userMovies)
@@ -453,7 +453,6 @@ const App = () => {
           }
         })
 
-
         localStorage.setItem('initialMovies', JSON.stringify(initialArray))
         setInitialMovies(initialArray)
       })
@@ -499,12 +498,12 @@ const App = () => {
     }
   }, [])
 
-  // React.useEffect(() => {
-  //   if (loggedIn) {
-  //     getInitialMovies()
-  //     getSavedMovies()
-  //   }
-  // }, [loggedIn])
+  React.useEffect(() => {
+    if (loggedIn) {
+      getInitialMovies()
+      //getSavedMovies()
+    }
+  }, [loggedIn])
 
   function isSavedMovie(movie) {
     return savedMovies.some((item) => item.id === movie.id)
