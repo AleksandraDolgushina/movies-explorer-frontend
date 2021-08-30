@@ -459,7 +459,8 @@ const App = () => {
       // })
       
       localStorage.setItem('initialMovies', JSON.stringify(data))
-      setInitialMovies(data)
+      const allMovies = JSON.parse(localStorage.getItem('initialMovies'))
+      setInitialMovies(allMovies)
     })
     .catch((err) => {
       setLoadingError(
@@ -488,7 +489,11 @@ const App = () => {
     
     React.useEffect(() => {
       const initial = JSON.parse(localStorage.getItem('initialMovies'))
-      initial && setInitialMovies(initial)
+      if (initial) {
+        setInitialMovies(initial)
+      } else {
+        getInitialMovies()
+      }
   
       const saved = JSON.parse(localStorage.getItem('savedMovies'))
       if (saved) {
@@ -498,12 +503,12 @@ const App = () => {
       }
     }, [])
 
-  // React.useEffect(() => {
-  //   if (loggedIn) {
-  //     getInitialMovies()
-  //     getSavedMovies()
-  //   }
-  // }, [loggedIn])
+  React.useEffect(() => {
+    if (loggedIn) {
+      getInitialMovies()
+      getSavedMovies()
+    }
+  }, [loggedIn])
 
   function isSavedMovie(movie) {
     return savedMovies.some((item) => item.id === movie.id)
