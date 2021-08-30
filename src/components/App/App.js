@@ -393,37 +393,22 @@ const App = () => {
       })
   }, []);
 
-  React.useEffect(() => {
-    const initial = JSON.parse(localStorage.getItem('initialMovies'))
-    if (initial) {
-      setInitialMovies(initial)
-    } else {
-      getInitialMovies()
-    }
-
-    const saved = JSON.parse(localStorage.getItem('savedMovies'))
-    if (saved) {
-      setSavedMovies(saved)
-    } else {
-      getSavedMovies()
-    }
-  }, [])
-
+  
   // function getCurrentUser() {
   //   const token = localStorage.getItem('jwt')
   //   mainApi
   //     .getCurrentUser(token)
   //     .then((res) => {
-  //       if (res) {
-  //         setCurrentUser(res)
-  //         localStorage.setItem('currentUser', JSON.stringify(res))
+    //       if (res) {
+      //         setCurrentUser(res)
+      //         localStorage.setItem('currentUser', JSON.stringify(res))
   //       }
   //     })
   //     .catch((err) => {
   //       console.log(err)
   //     })
   // }
-
+  
   function handleSaveProfile(data) {
     mainApi
       .editUser(data)
@@ -440,51 +425,51 @@ const App = () => {
         }
         setIsInfoPopupOpen(true)
       })
-  }
+    }
 
-  function handleSignOut() {
-    localStorage.removeItem('jwt')
-    localStorage.removeItem('currentUser')
+    function handleSignOut() {
+      localStorage.removeItem('jwt')
+      localStorage.removeItem('currentUser')
     setLoggedIn(false)
     setCurrentUser({})
-
+    
     localStorage.removeItem('initialMovies')
     localStorage.removeItem('savedMovies')
     setInitialMovies([])
     setSavedMovies([])
     setFilterMovies([])
     setFilterSavedMovies([])
-
+    
     history.push('/')
   }
-
-
+  
+  
   function getInitialMovies() {
     moviesApi
-      .getMovies()
-      .then((data) => {
-        console.log(data)
-        const initialArray = data.map((item) => {
-          const imageURL = item.image ? item.image.url : ''
-          return {
-            ...item,
-            image: `https://api.nomoreparties.co${imageURL}`,
-            trailer: item.trailerLink,
-          }
-        })
-
-        localStorage.setItem('initialMovies', JSON.stringify(initialArray))
-        setInitialMovies(initialArray)
+    .getMovies()
+    .then((data) => {
+      console.log(data)
+      const initialArray = data.map((item) => {
+        const imageURL = item.image ? item.image.url : ''
+        return {
+          ...item,
+          image: `https://api.nomoreparties.co${imageURL}`,
+          trailer: item.trailerLink,
+        }
       })
-      .catch((err) => {
-        setLoadingError(
-          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+      
+      localStorage.setItem('initialMovies', JSON.stringify(initialArray))
+      setInitialMovies(initialArray)
+    })
+    .catch((err) => {
+      setLoadingError(
+        'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
         )
       })
-  }
-
-  function getSavedMovies() {
-    mainApi
+    }
+    
+    function getSavedMovies() {
+      mainApi
       .getUserMovies()
       .then((data) => {
         const savedArray = data.map((item) => {
@@ -499,8 +484,24 @@ const App = () => {
           'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
         )
       })
-  }
-
+    }
+    
+    React.useEffect(() => {
+      const initial = JSON.parse(localStorage.getItem('initialMovies'))
+      if (initial) {
+        setInitialMovies(initial)
+      } else {
+        getInitialMovies()
+      }
+  
+      const saved = JSON.parse(localStorage.getItem('savedMovies'))
+      if (saved) {
+        setSavedMovies(saved)
+      } else {
+        getSavedMovies()
+      }
+    }, [])
+    
   React.useEffect(() => {
     if (loggedIn) {
       getInitialMovies()
