@@ -511,6 +511,7 @@ const App = () => {
   }
 
   function filter(data, query) {
+    console.log(query)
     if (query) {
       const regex = new RegExp(query, 'gi')
       const filterData = data.filter((item) => {
@@ -528,7 +529,6 @@ const App = () => {
   }
 
   function onSubmitSearch(query) {
-    console.log(query)
     setIsLoading(true)
     setTimeout(() => {
       setQuery(query)
