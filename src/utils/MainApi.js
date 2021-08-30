@@ -129,8 +129,7 @@ class MainApi {
         return fetch(`${this._address}/users/me`, {
             credentials: 'include',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                ...this._headers,
                 'Authorization': `Bearer ${token}`,
             },
           }).then(this._handleResponse);
@@ -140,7 +139,8 @@ class MainApi {
 const mainApi = new MainApi({
     address: 'https://api.dolgushina.diploma.nomoredomains.monster',
     headers: {
-        'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
         }
 });
 
