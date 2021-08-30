@@ -440,6 +440,8 @@ const App = () => {
           }
         })
 
+        console.log(initialArray)
+
         localStorage.setItem('initialMovies', JSON.stringify(initialArray))
         setInitialMovies(initialArray)
       })
@@ -502,7 +504,7 @@ const App = () => {
       const filterData = data.filter((item) => {
         return regex.test(item.nameRU) || regex.test(item.nameEN)
       })
-      
+
       if (filterData.length === 0) {
         setLoadingError('Ничего не найдено')
       } else {
