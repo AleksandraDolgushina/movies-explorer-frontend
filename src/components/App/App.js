@@ -354,12 +354,10 @@ const App = () => {
     mainApi
       .authorize(email, password)
       .then((res) => {
-        if (res.token) {
           localStorage.setItem('jwt', res.token)
           setLoggedIn(true)
-          //getCurrentUser()
+          getCurrentUser()
           history.push('/movies')
-        }
       })
       .catch((err) => {
         if (err.status === 400) {
