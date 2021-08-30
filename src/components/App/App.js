@@ -440,7 +440,7 @@ const App = () => {
           }
         })
 
-        console.log(initialArray)
+        console.log(data)
 
         localStorage.setItem('initialMovies', JSON.stringify(initialArray))
         setInitialMovies(initialArray)
