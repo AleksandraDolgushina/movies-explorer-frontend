@@ -164,7 +164,7 @@ const App = () => {
   }
   
   
-  function getInitialMovies() {
+  React.useEffect(() => {
     moviesApi
     .getMovies()
     .then((data) => {
@@ -186,7 +186,7 @@ const App = () => {
         'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
         )
       })
-    }
+  })
     
     function getSavedMovies() {
       mainApi
@@ -211,7 +211,7 @@ const App = () => {
       if (initial) {
         setInitialMovies(initial)
       } else {
-        getInitialMovies()
+        //getInitialMovies()
       }
   
       const saved = JSON.parse(localStorage.getItem('savedMovies'))
@@ -224,7 +224,7 @@ const App = () => {
 
   React.useEffect(() => {
     if (loggedIn) {
-      getInitialMovies()
+      //getInitialMovies()
       getSavedMovies()
     }
   }, [loggedIn])
