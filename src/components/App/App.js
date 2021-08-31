@@ -40,7 +40,7 @@ const App = () => {
       .then((res) => {
       if (res) {
         setLoggedIn(true)
-        //getCurrentUser()
+        getCurrentUser()
         history.push(path)
       }
     })
@@ -84,7 +84,7 @@ const App = () => {
         if (res.token) {
           localStorage.setItem('jwt', res.token)
           setLoggedIn(true)
-          //getCurrentUser()
+          getCurrentUser()
           history.push('/movies')
         }
       })
@@ -99,35 +99,35 @@ const App = () => {
       })
   }
 
-    React.useEffect(() => {
-    Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
-      .then(([ userData, userMovies ]) => {
-        setCurrentUser(userData)
-        setSavedMovies(userMovies)
-        setLoggedIn(true)
-      })
-      .catch((err) => {
-        setLoadingError(
-          'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-        )
-      })
-  }, []);
-
-  
-  // function getCurrentUser() {
-  //   const token = localStorage.getItem('jwt')
-  //   mainApi
-  //     .getCurrentUser(token)
-  //     .then((res) => {
-    //       if (res) {
-      //         setCurrentUser(res)
-      //         localStorage.setItem('currentUser', JSON.stringify(res))
-  //       }
+  //   React.useEffect(() => {
+  //   Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
+  //     .then(([ userData, userMovies ]) => {
+  //       setCurrentUser(userData)
+  //       setSavedMovies(userMovies)
+  //       setLoggedIn(true)
   //     })
   //     .catch((err) => {
-  //       console.log(err)
+  //       setLoadingError(
+  //         'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
+  //       )
   //     })
-  // }
+  // }, []);
+
+  
+  function getCurrentUser() {
+    const token = localStorage.getItem('jwt')
+    mainApi
+      .getCurrentUser(token)
+      .then((res) => {
+          if (res) {
+              setCurrentUser(res)
+              localStorage.setItem('currentUser', JSON.stringify(res))
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   
   function handleSaveProfile(data) {
     mainApi
