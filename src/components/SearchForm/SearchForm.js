@@ -34,7 +34,7 @@ function SearchForm({onSubmitSearch,onFilterShort, isLoading}) {
                 />
                 <button
                     className={`search__button ${
-                        isSubmitDisabled && 'search__button_disabled'
+                    isSubmitDisabled && 'search__button_disabled'
                     }`}
                     disabled={isSubmitDisabled || isLoading}
                 >
