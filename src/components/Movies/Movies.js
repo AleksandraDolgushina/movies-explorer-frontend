@@ -3,6 +3,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import Footer from '../Footer/Footer'
 import React from "react";
 import Preloader from '../Preloader/Preloader'
+import './Movies.css'
 
 function Movies({
     movies, 
