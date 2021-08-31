@@ -98,21 +98,6 @@ const App = () => {
         }
       })
   }
-
-  //   React.useEffect(() => {
-  //   Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
-  //     .then(([ userData, userMovies ]) => {
-  //       setCurrentUser(userData)
-  //       setSavedMovies(userMovies)
-  //       setLoggedIn(true)
-  //     })
-  //     .catch((err) => {
-  //       setLoadingError(
-  //         'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
-  //       )
-  //     })
-  // }, []);
-
   
   function getCurrentUser() {
     const token = localStorage.getItem('jwt')
@@ -201,7 +186,7 @@ const App = () => {
       .catch((err) => {
         localStorage.removeItem('savedMovies')
         setLoadingError(
-          'Во время запроса произошла ошибка. Подождите немного и попробуйте ещё раз'
+          'Введите ключевое слово'
         )
       })
     }
