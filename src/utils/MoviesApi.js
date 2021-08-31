@@ -20,6 +20,10 @@ export class MoviesApi {
           headers: this._headers,
         })
         .then(this._getResponseData)
+        .then ((res) => {
+          return res
+        }
+        )
     }
   }
   
