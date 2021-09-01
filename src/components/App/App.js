@@ -387,6 +387,26 @@ const [infoPopupTitle, setInfoPopupTitle] = React.useState({
 const [isError, setIsError] = React.useState(false);
 let location = useLocation()
 
+  React.useEffect(() => {
+    const path = location.pathname
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      mainApi
+      .checkToken(token)
+      .then((res) => {
+      if (res) {
+        setLoggedIn(true)
+        history.push(path)
+      }
+    })
+      .catch((err) => {
+        console.log(err)
+        localStorage.removeItem('jwt')
+        history.push('/')
+      })
+    }
+  }, [])
+
 function handleInfoPopupClick() {
   setIsInfoPopupOpen(true);
 }
@@ -444,6 +464,7 @@ const handleRegister = ({ name, email, password }) => {
         .then((res) => {
           setCurrentUser(res);
           setLoggedIn(true);
+          localStorage.setItem('jwt', res.token)
           history.push('/movies');
         })
         .catch((err) => {
@@ -467,6 +488,7 @@ const handleLogin = ({ email, password }, onSuccess) => {
     .authorize( email, password )
     .then((res) => {
       setCurrentUser(res);
+      localStorage.setItem('jwt', res.token)
       setLoggedIn(true);
       onSuccess();
       openSuccessPopup('С возвращением!');

@@ -91,6 +91,7 @@ class MainApi {
     register( name, email, password ) {
         return fetch(`${this._address}/signup`, {
           method: 'POST',
+          credentials: 'include',
           headers: this._headers,
           body: JSON.stringify({ name, email, password }),
         }).then(this._handleResponse);
@@ -104,6 +105,16 @@ class MainApi {
           body: JSON.stringify({ email, password }),
         }).then(this._handleResponse);
     };
+
+    checkToken(token) {
+        return fetch(`${this._address}/users/me`, {
+            headers: {
+            credentials: 'include',
+              ...this._headers,
+              Authorization: `Bearer ${token}`,
+            },
+          }).then(this._handleResponse);
+    }
 
     getCurrentUser() {
         const token = localStorage.getItem('jwt')
