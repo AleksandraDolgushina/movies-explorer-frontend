@@ -153,7 +153,6 @@ const App = () => {
     moviesApi
     .getMovies()
     .then((data) => {
-      console.log(data)
       const initialArray = data.map((item) => {
         const imageURL = item.image ? item.image.url : ''
         return {
@@ -230,7 +229,6 @@ const App = () => {
       } else {
         setLoadingError('')
       }
-      console.log(filterData)
       return filterData
     }
     return []
@@ -285,18 +283,13 @@ const App = () => {
       .addMovies(movie)
       .then((res) => {
         setSavedMovies([...savedMovies, { ...res, id: res.movieId }])
+        localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
       })
       .catch((err) => {
         setTextPopup('На сервере произошла ошибка')
         setIsInfoPopupOpen(true)
       })
   }
-
-  React.useEffect(() => {
-    setFilterSavedMovies(filter(savedMovies, query))
-    localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
-  }, [savedMovies])
-
 
   function onClosePopup() {
     setIsInfoPopupOpen(false)
