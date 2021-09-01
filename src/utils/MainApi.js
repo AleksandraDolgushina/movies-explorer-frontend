@@ -52,7 +52,7 @@ class MainApi {
                 description: data.description,
                 director: data.director,
                 duration: data.duration,
-                image: data.image,
+                image: `https://api.nomoreparties.co${data.image.url}`,
                 nameEN: data.nameEN,
                 nameRU: data.nameRU,
                 trailer: data.trailer,
