@@ -14,7 +14,6 @@ function Login({handleLogin}) {
 
     function handleOnSubmit(evt) {
         evt.preventDefault()
-        isValid &&
         handleLogin({values})
         resetForm()
     }
