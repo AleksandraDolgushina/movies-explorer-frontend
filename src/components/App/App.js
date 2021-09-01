@@ -671,20 +671,10 @@ return (
       <div className='page'>
         <Switch>
           <Route path='/signin'>
-            {loggedIn ? (
-              <Redirect to='/' />
-            ) : (
               <Login handleLogin={handleLogin} />
-            )}
           </Route>
           <Route path='/signup'>
-            {loggedIn ? (
-              <Redirect to='/' />
-            ) : (
-              <Register
-                handleRegister={handleRegister}
-              />
-            )}
+              <Register handleRegister={handleRegister} />
           </Route>
           <Route exact path='/'>
             <Main />
