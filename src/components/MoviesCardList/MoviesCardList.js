@@ -6,6 +6,7 @@ import { MovieContext } from '../../contexts/MovieContext'
 function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage}) {
     const value = React.useContext(MovieContext);
     const movies = value.movies;
+    const savedMovies = value.savedMovies;
     const [extraPortion, setExtraPortion] = React.useState(3)
     const [currentCount, setCurrenCount] = React.useState(0)
     const [renderMovies, setRenderMovies] = React.useState([])
@@ -58,7 +59,7 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage})
         <section className="cards">
             <div className="cards__movies">
                 {isSavedPage && 
-                    movies.map((movie) => (
+                    savedMovies.map((movie) => (
                         <MoviesCard
                             movie={movie}
                             key={movie.movieId}
