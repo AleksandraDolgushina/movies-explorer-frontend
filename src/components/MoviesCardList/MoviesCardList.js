@@ -2,6 +2,7 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
 import { MovieContext } from '../../contexts/MovieContext'
+import { Route } from "react-router-dom";
 
 function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick}) {
     const value = React.useContext(MovieContext);
@@ -58,18 +59,34 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick}) {
     return (
         <section className="cards">
             <div className="cards__movies">
-                {renderMovies.map((movie) => (
-                    <MoviesCard
-                        movie={movie}
-                        key={movie.id}
-                        isSavedMovies={isSavedMovie}
-                        onLikeClick={onLikeClick}
-                        onDeleteClick={onDeleteClick}
-                    />
-                ))}
+                {movies && (
+                    <Route path='/movies'>
+                        {renderMovies.map((movie) => (
+                            <MoviesCard
+                                movie={movie}
+                                key={movie.id}
+                                isSavedMovies={isSavedMovie}
+                                onLikeClick={onLikeClick}
+                                onDeleteClick={onDeleteClick}
+                            />
+                        ))}
+                    </Route>
+                )}
             </div>
             {currentCount < movies.length && (
                 <button className="cards__more" onClick={handleMoreCards}>Ещё</button>
+            )}
+            {savedMovies.length > 0 && (
+                <Route path='/saved-movies'>
+                    {savedMovies.map((movie) => (
+                        <MoviesCard
+                            movie={movie}
+                            key={movie.movieId}
+                            isSavedMovies={isSavedMovie}
+                            onDeleteClick={onDeleteClick}
+                        /> 
+                    ))}
+                </Route>
             )}
         </section>
     )
