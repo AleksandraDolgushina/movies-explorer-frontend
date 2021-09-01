@@ -21,6 +21,7 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
     return (
         <div className="movie">
             <a href={trailer} target="_blank" className="movie__image" rel="noreferrer">
+                <img className="movie__image" src={`https://api.nomoreparties.co${movie.image.url}`} alt="Обложка фильма" />
             </a>
             <div className="movie__title">
                 <h2 className="movie__name">{nameRU}</h2>
@@ -29,16 +30,6 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
                 </Route>
                 <Route path='/saved-movies'>
                     <button className="movie__delete" onClick={handleDeleteClick}></button>
-                </Route>
-                <Route path='/movies'>
-                    <img
-                        className='movie__image'
-                        src={`https://api.nomoreparties.co${movie.image.url}`}
-                        alt={movie.name}
-                    />
-                </Route>
-                <Route path='/saved-movies'>
-                    <img className='movie__image' src={movie.image} alt={movie.name} />
                 </Route>
             </div>
             <p className="movie__duration">{duration}</p>
