@@ -1,6 +1,6 @@
 import './App.css';
 import { Redirect, Route, Switch, useHistory, useLocation } from 'react-router-dom';
-import MovieContext from '../../contexts/MovieContext'
+import { MovieContext } from '../../contexts/MovieContext'
 import Main from '../Main/Main'
 import Header from '../Header/Header';
 import Movies from '../Movies/Movies'
