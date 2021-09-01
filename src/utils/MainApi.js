@@ -55,7 +55,7 @@ class MainApi {
                 image: `https://api.nomoreparties.co${data.image.url}`,
                 nameEN: data.nameEN,
                 nameRU: data.nameRU,
-                trailer: data.trailer,
+                trailer: data.trailerLink,
                 year: data.year,
                 thumbnail: data.image,
                 movieId: data.id.toString(),
