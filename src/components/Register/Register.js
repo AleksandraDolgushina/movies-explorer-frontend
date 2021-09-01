@@ -11,11 +11,11 @@ function Register({handleRegister}) {
         handleChange,
         resetForm,
       } = useFormWithValidation({})
+      const { name, email, password } = values;
 
     function handleOnSubmit(evt) {
         evt.preventDefault()
-        isValid &&
-        handleRegister(values)
+        handleRegister({ name, email, password })
         resetForm()
     }      
     return (

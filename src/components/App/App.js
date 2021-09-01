@@ -430,7 +430,9 @@ function isSavedMovie(movie) {
 }
 
 const handleRegister = ({ name, email, password }, onSuccess) => {
-  setIsSending(true);
+  if (!name || !email || !password) {
+    return  
+  }
   mainApi
     .register( name, email, password )
 

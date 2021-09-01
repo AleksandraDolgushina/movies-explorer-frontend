@@ -91,7 +91,6 @@ class MainApi {
     register( name, email, password ) {
         return fetch(`${this._address}/signup`, {
           method: 'POST',
-          credentials: 'include',
           headers: this._headers,
           body: JSON.stringify({ name, email, password }),
         }).then(this._handleResponse);
