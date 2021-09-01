@@ -3,10 +3,10 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
 import './SearchForm.css'
 import search_white from '../../images/search_white.svg'
 import React from 'react'
-import useFormAndValidation from '../../hooks/useFormAndValidation';
+import useFormValidation from '../../hooks/useFormValidation';
 
 function SearchForm({getMovies, onFilterShort, isLoading}) {
-    const { values, handleChange, resetForm, errors, isValid } = useFormAndValidation ();
+    const { values, handleChange, resetForm, errors, isValid } = useFormValidation ();
     const { name } = values;
 
     function handleOnSubmit(evt) {
