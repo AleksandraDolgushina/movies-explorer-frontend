@@ -9,7 +9,6 @@ function SavedMovies({
     getMovies, 
     isLoading,  
     onSubmitSearch, 
-    loadingError,
     onDeleteClick,
     isSavedMovie,
     onFilterShort
@@ -20,10 +19,10 @@ function SavedMovies({
     return (
         <section className="saved-movies">
             <SearchForm
-              onSubmitSearch={onSubmitSearch}
-              isLoading={isLoading}
-              getMovies={getMovies}
-              onFilterShort={onFilterShort}  
+                onSubmitSearch={onSubmitSearch}
+                isLoading={isLoading}
+                getMovies={getMovies}
+                onFilterShort={onFilterShort}  
             />
             {isLoading && <Preloader />}
             {savedMovies && (
