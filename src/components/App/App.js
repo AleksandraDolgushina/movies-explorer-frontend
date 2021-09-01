@@ -528,7 +528,7 @@ function getMovieslist(name) {
   if (loggedIn) {
     setIsLoading(true);
     moviesApi
-      .getMoviesCardlist()
+      .getMovies()
       .then((moviesData) => {
         localStorage.setItem('movies', JSON.stringify(moviesData));
         searchMovies(name);
