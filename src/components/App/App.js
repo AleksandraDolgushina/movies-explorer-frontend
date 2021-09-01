@@ -490,17 +490,13 @@ const handleLogin = ({ email, password }) => {
     .authorize( email, password )
     .then((res) => {
       setCurrentUser(res);
-      localStorage.setItem('jwt', res.token)
       setLoggedIn(true);
-      openSuccessPopup('С возвращением!');
+      localStorage.setItem('jwt', res.token)
       history.push('/movies');
     })
     .catch((err) => {
       console.log(err);
       openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
-    })
-    .finally(() => {
-      setIsSending(false);
     });
 };
 
