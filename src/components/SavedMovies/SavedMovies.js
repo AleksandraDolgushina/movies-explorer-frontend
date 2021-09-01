@@ -11,7 +11,8 @@ function SavedMovies({
     onSubmitSearch, 
     onDeleteClick,
     isSavedMovie,
-    onFilterShort
+    onFilterShort,
+    isSavedPage
 }) {
     const value = React.useContext(MovieContext);
     const savedMovies = value.savedMovies;
@@ -28,7 +29,9 @@ function SavedMovies({
             {savedMovies && (
                 <MoviesCardList
                 isSavedMovie={isSavedMovie}
-                onDeleteClick={onDeleteClick} />
+                onDeleteClick={onDeleteClick}
+                isSavedPage={true}
+                />
             )}
             <Footer />
         </section>

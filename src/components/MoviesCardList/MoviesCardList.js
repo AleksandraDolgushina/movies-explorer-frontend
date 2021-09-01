@@ -4,7 +4,7 @@ import './MoviesCardList.css'
 import { MovieContext } from '../../contexts/MovieContext'
 import { Route } from "react-router-dom";
 
-function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick}) {
+function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage}) {
     const value = React.useContext(MovieContext);
     const movies = value.movies;
     const savedMovies = value.savedMovies;
@@ -59,35 +59,32 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick}) {
     return (
         <section className="cards">
             <div className="cards__movies">
-                {movies && (
-                    <Route path='/movies'>
-                        {renderMovies.map((movie) => (
-                            <MoviesCard
-                                movie={movie}
-                                key={movie.id}
-                                isSavedMovies={isSavedMovie}
-                                onLikeClick={onLikeClick}
-                                onDeleteClick={onDeleteClick}
-                            />
-                        ))}
-                    </Route>
-                )}
+                {isSavedPage && 
+                    movies.map((movie) => (
+                        <MoviesCard
+                            movie={movie}
+                            key={movie.movieId}
+                            isSavedMovies={isSavedMovie}
+                            onLikeClick={onLikeClick}
+                            onDeleteClick={onDeleteClick}
+                        />
+                    ))
+                }
+
+                {!isSavedPage &&
+                    renderMovies.map((movie) => (
+                        <MoviesCard
+                            key={movie.movieId}
+                            movie={movie}
+                            onLikeClick={onLikeClick}
+                            isSavedMovies={isSavedMovie}
+                        />
+                    ))
+                }
             </div>
-            {currentCount < movies.length && (
+
+            {!isSavedPage && currentCount < movies.length && (
                 <button className="cards__more" onClick={handleMoreCards}>Ещё</button>
-            )}
-            {savedMovies.length > 0 && (
-                <Route path='/saved-movies'>
-                    {savedMovies.length <= currentCount &&
-                        savedMovies.map((movie) => (
-                            <MoviesCard
-                                movie={movie}
-                                key={movie.movieId}
-                                isSavedMovies={isSavedMovie}
-                                onDeleteClick={onDeleteClick}
-                            /> 
-                    ))}
-                </Route>
             )}
         </section>
     )
