@@ -51,7 +51,6 @@ class MainApi {
         const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/movies`, {
             method: 'POST',
-            credentials: 'include',
             headers: {
                 ...this._headers,
                 Authorization: `Bearer ${token}`,
@@ -65,7 +64,7 @@ class MainApi {
                 image: data.image,
                 trailer: data.trailer,
                 thumbnail: data.thumbnail,
-                movieId: data.movieId,
+                movieId: data.id.toString(),
                 nameRU: data.nameRU,
                 nameEN: data.nameEN
             })
