@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import './MoviesCard.css'
 
 function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
-    const { image, nameRU, duration, trailer } = movie;
+    const { nameRU, duration, trailer } = movie;
     const isSaved = isSavedMovies(movie);
     const cardLikeButtonClassName = (
         `movie__like ${isSaved && 'movie__like_active'}`
