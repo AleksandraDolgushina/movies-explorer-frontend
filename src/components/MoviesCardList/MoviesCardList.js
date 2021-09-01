@@ -1,11 +1,13 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
-import { MovieContext } from '../../contexts/MovieContext';
+import { MovieContext } from '../../contexts/MovieContext'
+import { Route } from "react-router-dom";
 
-function MoviesCardList({isSavedMovies, onLikeClick, onDeleteClick, isSavedPage}) {
+function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage}) {
     const value = React.useContext(MovieContext);
     const movies = value.movies;
+    const savedMovies = value.savedMovies;
     const [extraPortion, setExtraPortion] = React.useState(3)
     const [currentCount, setCurrenCount] = React.useState(0)
     const [renderMovies, setRenderMovies] = React.useState([])
@@ -57,26 +59,31 @@ function MoviesCardList({isSavedMovies, onLikeClick, onDeleteClick, isSavedPage}
     return (
         <section className="cards">
             <div className="cards__movies">
-                {isSavedPage && movies.map((movie) => (
-                    <MoviesCard
-                        movie={movie}
-                        key={movie.movieId}
-                        isSavedMovies={isSavedMovies}
-                        onLikeClick={onLikeClick}
-                        onDeleteClick={onDeleteClick}
-                    />
-                ))}
-                    {!isSavedPage &&
-                        renderMovies.map((movie) => (
-                            <MoviesCard
-                                key={movie.movieId}
-                                movie={movie}
-                                onLikeClick={onLikeClick}
-                                onDeleteClick={onDeleteClick}
-                                isSavedMovies={isSavedMovies}
-                            />
-                    ))}
+                {isSavedPage && 
+                    movies.map((movie) => (
+                        <MoviesCard
+                            movie={movie}
+                            key={movie.movieId}
+                            isSavedMovies={isSavedMovie}
+                            onLikeClick={onLikeClick}
+                            onDeleteClick={onDeleteClick}
+                        />
+                    ))
+                }
+
+                {!isSavedPage &&
+                    renderMovies.map((movie) => (
+                        <MoviesCard
+                            key={movie.movieId}
+                            movie={movie}
+                            onLikeClick={onLikeClick}
+                            isSavedMovies={isSavedMovie}
+                            onDeleteClick={onDeleteClick}
+                        />
+                    ))
+                }
             </div>
+
             {!isSavedPage && currentCount < movies.length && (
                 <button className="cards__more" onClick={handleMoreCards}>Ещё</button>
             )}

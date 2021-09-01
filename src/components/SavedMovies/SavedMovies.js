@@ -10,8 +10,9 @@ function SavedMovies({
     isLoading,  
     onSubmitSearch, 
     onDeleteClick,
-    isSavedMovies,
-    onFilterShort
+    isSavedMovie,
+    onFilterShort,
+    isSavedPage
 }) {
     const value = React.useContext(MovieContext);
     const savedMovies = value.savedMovies;
@@ -27,7 +28,7 @@ function SavedMovies({
             {isLoading && <Preloader />}
             {savedMovies && (
                 <MoviesCardList
-                isSavedMovie={isSavedMovies}
+                isSavedMovie={isSavedMovie}
                 onDeleteClick={onDeleteClick}
                 isSavedPage={true}
                 />
