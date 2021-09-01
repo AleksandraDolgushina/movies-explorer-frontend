@@ -3,38 +3,44 @@ import SearchForm from "../SearchForm/SearchForm";
 import Footer from '../Footer/Footer'
 import React from "react";
 import Preloader from '../Preloader/Preloader'
-import './Movies.css'
-import { MovieContext } from '../../contexts/MovieContext';
 
 function Movies({
-    getMovies, 
-    isLoading,  
+    movies, 
+    isLoading, 
+    savedMovies, 
     onSubmitSearch, 
     loadingError, 
-    onLikeClick,
-    onDeleteClick,
-    isSavedMovie,
-    onFilterShort
+    onLikeClick, 
+    isSavedMovie
 }) {
-    const value = React.useContext(MovieContext);
-    const movies = value.movies;
+    const [shortFilm, setShortFilm] = React.useState(false)
+    
+    function onFilterShortFilm(filterOn) {
+        setShortFilm(filterOn)
+    }
+
+    function filterShortFilm(movies) {
+        return movies.filter((item) => {
+          return item.duration < 40
+        })
+    }
 
     return (
         <section className="movies">
             <SearchForm 
                 onSubmitSearch={onSubmitSearch}
-                onFilterShort={onFilterShort}
+                onFilterShort={onFilterShortFilm}
                 isLoading={isLoading}
-                getMovies={getMovies}
             />
 
             {isLoading && <Preloader />}
 
-            {movies && (
+            {!isLoading && loadingError === '' && (
                 <MoviesCardList 
+                    movies={shortFilm ? filterShortFilm(movies) : movies}
                     isSavedMovie={isSavedMovie}
                     onLikeClick={onLikeClick}
-                    onDeleteClick={onDeleteClick}
+                    savedMovies={savedMovies}
                 />
             )}
             {!isLoading && loadingError !== '' && (
