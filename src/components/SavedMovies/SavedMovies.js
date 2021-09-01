@@ -1,12 +1,37 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from '../Footer/Footer'
+import React from "react";
+import { MovieContext } from '../../contexts/MovieContext'
+import Preloader from "../Preloader/Preloader";
 
-function SavedMovies() {
+function SavedMovies({
+    getMovies, 
+    isLoading,  
+    onSubmitSearch, 
+    onDeleteClick,
+    isSavedMovies,
+    onFilterShort
+}) {
+    const value = React.useContext(MovieContext);
+    const savedMovies = value.savedMovies;
+
     return (
         <section className="saved-movies">
-            <SearchForm />
-            <MoviesCardList />
+            <SearchForm
+                onSubmitSearch={onSubmitSearch}
+                isLoading={isLoading}
+                getMovies={getMovies}
+                onFilterShort={onFilterShort}  
+            />
+            {isLoading && <Preloader />}
+            {savedMovies && (
+                <MoviesCardList
+                isSavedMovie={isSavedMovies}
+                onDeleteClick={onDeleteClick}
+                isSavedPage={true}
+                />
+            )}
             <Footer />
         </section>
     )

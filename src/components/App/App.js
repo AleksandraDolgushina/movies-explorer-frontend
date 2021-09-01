@@ -708,7 +708,7 @@ return (
             getMovies={getMovieslist}
             onLikeClick={handleSavedMovie}
             onDeleteClick={handleMovieDelete}
-            isSavedMovie={isSavedMovie}
+            isSavedMovies={isSavedMovie}
           />
           <ProtectedRoute
             path='/saved-movies'
@@ -716,7 +716,7 @@ return (
             isLoading={isLoading}
             loggedIn={loggedIn}
             onDeleteClick={handleSavedMovieDelete}
-            isSavedMovie={isSavedMovie}
+            isSavedMovies={isSavedMovie}
             onFilterShort={handleToggleShortSavedMovies}
             getMovies={searchSavedMovies}
           />

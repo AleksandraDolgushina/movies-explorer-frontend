@@ -13,7 +13,7 @@ function Movies({
     loadingError, 
     onLikeClick,
     onDeleteClick,
-    isSavedMovie,
+    isSavedMovies,
     onFilterShort
 }) {
     const value = React.useContext(MovieContext);
@@ -32,7 +32,7 @@ function Movies({
 
             {movies && (
                 <MoviesCardList 
-                    isSavedMovie={isSavedMovie}
+                    isSavedMovie={isSavedMovies}
                     onLikeClick={onLikeClick}
                     onDeleteClick={onDeleteClick}
                 />
