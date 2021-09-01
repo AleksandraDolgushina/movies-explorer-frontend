@@ -78,13 +78,14 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick}) {
             )}
             {savedMovies.length > 0 && (
                 <Route path='/saved-movies'>
-                    {savedMovies.map((movie) => (
-                        <MoviesCard
-                            movie={movie}
-                            key={movie.movieId}
-                            isSavedMovies={isSavedMovie}
-                            onDeleteClick={onDeleteClick}
-                        /> 
+                    {savedMovies.length <= currentCount &&
+                        savedMovies.map((movie) => (
+                            <MoviesCard
+                                movie={movie}
+                                key={movie.movieId}
+                                isSavedMovies={isSavedMovie}
+                                onDeleteClick={onDeleteClick}
+                            /> 
                     ))}
                 </Route>
             )}
