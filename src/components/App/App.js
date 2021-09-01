@@ -482,7 +482,7 @@ const handleRegister = ({ name, email, password }) => {
     });
 };
 
-const handleLogin = ({ email, password }, onSuccess) => {
+const handleLogin = ({ email, password }) => {
   setIsSending(true);
   mainApi
     .authorize( email, password )
@@ -490,7 +490,6 @@ const handleLogin = ({ email, password }, onSuccess) => {
       setCurrentUser(res);
       localStorage.setItem('jwt', res.token)
       setLoggedIn(true);
-      onSuccess();
       openSuccessPopup('С возвращением!');
       history.push('/movies');
     })
@@ -662,7 +661,7 @@ function handleUpdateProfile({ name, email }) {
 
 function handleSignOut(email) {
   mainApi
-    .logout(email)
+    .logout({email})
     .then(() => {
       setLoggedIn(false);
       setCurrentUser({ name: '', email: '' });

@@ -80,7 +80,6 @@ class MainApi {
     logout({ email }) {
         return fetch(`${this._address}/signout`, {
           method: 'POST',
-          credentials: 'include',
           headers: this._headers,
           body: JSON.stringify({
             email: email,
