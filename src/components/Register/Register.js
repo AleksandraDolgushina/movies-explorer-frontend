@@ -14,6 +14,7 @@ function Register({handleRegister}) {
 
     function handleOnSubmit(evt) {
         evt.preventDefault()
+        isValid &&
         handleRegister(values)
         resetForm()
     }      

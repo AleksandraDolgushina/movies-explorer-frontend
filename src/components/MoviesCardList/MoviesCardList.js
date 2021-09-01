@@ -1,8 +1,12 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
+import MovieContext from '../../contexts/MovieContext'
 
-function MoviesCardList({movies, isSavedMovie, onLikeClick, savedMovies}) {
+function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick}) {
+    const value = React.useContext(MovieContext);
+    const movies = value.movies;
+    const savedMovies = value.savedMovies;
     const [extraPortion, setExtraPortion] = React.useState(3)
     const [currentCount, setCurrenCount] = React.useState(0)
     const [renderMovies, setRenderMovies] = React.useState([])
@@ -60,7 +64,7 @@ function MoviesCardList({movies, isSavedMovie, onLikeClick, savedMovies}) {
                         key={movie.id}
                         isSavedMovies={isSavedMovie}
                         onLikeClick={onLikeClick}
-                        savedMovies={savedMovies}
+                        onDeleteClick={onDeleteClick}
                     />
                 ))}
             </div>

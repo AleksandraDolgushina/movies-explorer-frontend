@@ -10,14 +10,6 @@ class MainApi {
         } return Promise.reject(`Ошибка ${response.status}`)
     };
 
-    getUser() {
-        return fetch(`${this._address}/users/me`, {
-            credentials: 'include',
-            headers: this._headers,
-        })
-        .then(this._handleResponse)
-    ;}
-
     getUserMovies() {
         const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/movies`, {
@@ -113,16 +105,6 @@ class MainApi {
           body: JSON.stringify({ email, password }),
         }).then(this._handleResponse);
     };
-
-    checkToken(token) {
-        return fetch(`${this._address}/users/me`, {
-            headers: {
-            credentials: 'include',
-              ...this._headers,
-              Authorization: `Bearer ${token}`,
-            },
-          }).then(this._handleResponse);
-    }
 
     getCurrentUser() {
         const token = localStorage.getItem('jwt')

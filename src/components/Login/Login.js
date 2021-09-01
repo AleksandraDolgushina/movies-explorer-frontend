@@ -14,7 +14,8 @@ function Login({handleLogin}) {
 
     function handleOnSubmit(evt) {
         evt.preventDefault()
-        handleLogin(values)
+        isValid &&
+        handleLogin({values})
         resetForm()
     }
 
@@ -23,7 +24,11 @@ function Login({handleLogin}) {
             <Link to="/" >
                 <img className="login__logo" src={logo} alt="Логотип"/>
             </Link>
-            <form className="form login__form" name="loginer" noValidate onSubmit={handleOnSubmit}>
+            <form 
+                className="form login__form" 
+                name="loginer" 
+                noValidate 
+                onSubmit={handleOnSubmit}>
                 <h2 className="login__title">Рады видеть!</h2>
                 <label className="login__item">E-mail
                     <input 

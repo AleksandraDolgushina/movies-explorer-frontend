@@ -3,23 +3,18 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox'
 import './SearchForm.css'
 import search_white from '../../images/search_white.svg'
 import React from 'react'
+import useFormAndValidation from '../../hooks/useFormAndValidation';
 
-function SearchForm({onSubmitSearch,onFilterShort, isLoading}) {
-    const [query, setQuery] = React.useState('')
-    const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(false)
-    
-    function handleOnChange(evt) {
-        setQuery(evt.target.value)
-    }
-    
+function SearchForm({getMovies, onFilterShort, isLoading}) {
+    const { values, handleChange, resetForm, errors, isValid } = useFormAndValidation ();
+    const { name } = values;
+
     function handleOnSubmit(evt) {
-        evt.preventDefault()
-        onSubmitSearch(query)
+        evt.preventDefault();
+        isValid && !isLoading &&
+          getMovies(name);
+        resetForm();
     }
-    
-    React.useEffect(() => {
-        setIsSubmitDisabled(query === '')
-    }, [query])
 
     return (
         <section className="search">
@@ -28,15 +23,16 @@ function SearchForm({onSubmitSearch,onFilterShort, isLoading}) {
                 <input 
                     className="search__input" 
                     placeholder="Фильм" 
-                    required 
-                    onChange={handleOnChange} 
-                    disabled={isLoading}
+                    required
+                    name='name'
+                    onChange={handleChange}
+                    value={name || ''}
                 />
                 <button
                     className={`search__button ${
-                    isSubmitDisabled && 'search__button_disabled'
+                    !isValid && 'search__button_disabled'
                     }`}
-                    disabled={isSubmitDisabled || isLoading}
+                    disabled={!isValid}
                 >
                     <img className="search__image" src={search} alt="Искать"/>
                 </button>
