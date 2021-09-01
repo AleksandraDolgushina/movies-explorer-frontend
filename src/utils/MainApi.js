@@ -57,16 +57,16 @@ class MainApi {
             },
             body: JSON.stringify({
                 country: data.country,
+                description: data.description,
                 director: data.director,
                 duration: data.duration,
-                year: data.year,
-                description: data.description,
                 image: data.image,
-                trailer: data.trailer,
-                thumbnail: data.thumbnail,
-                movieId: data.id.toString(),
+                nameEN: data.nameEN,
                 nameRU: data.nameRU,
-                nameEN: data.nameEN
+                trailer: data.trailer,
+                year: data.year,
+                thumbnail: data.image,
+                movieId: data.id.toString(),
             })
         })
         .then(this._handleResponse)
