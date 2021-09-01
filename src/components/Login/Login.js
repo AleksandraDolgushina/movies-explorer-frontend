@@ -11,10 +11,11 @@ function Login({handleLogin}) {
         handleChange,
         resetForm
     } = useFormWithValidation({})
+    const { email, password } = values;
 
     function handleOnSubmit(evt) {
         evt.preventDefault()
-        handleLogin({values})
+        handleLogin({ email, password })
         resetForm()
     }
 
