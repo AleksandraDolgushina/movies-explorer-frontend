@@ -65,7 +65,6 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage})
                             movie={movie}
                             key={movie.movieId}
                             isSavedMovies={isSavedMovie}
-                            onLikeClick={onLikeClick}
                             onDeleteClick={onDeleteClick}
                         />
                     ))
@@ -74,7 +73,7 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage})
                 {!isSavedPage &&
                     renderMovies.map((movie) => (
                         <MoviesCard
-                            key={movie.movieId}
+                            key={movie.id}
                             movie={movie}
                             onLikeClick={onLikeClick}
                             isSavedMovies={isSavedMovie}
