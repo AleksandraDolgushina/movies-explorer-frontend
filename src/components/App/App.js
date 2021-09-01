@@ -483,7 +483,9 @@ const handleRegister = ({ name, email, password }) => {
 };
 
 const handleLogin = ({ email, password }) => {
-  setIsSending(true);
+  if (!email || !password) {
+    return
+  }
   mainApi
     .authorize( email, password )
     .then((res) => {
