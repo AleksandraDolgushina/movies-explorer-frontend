@@ -433,7 +433,7 @@ React.useEffect(() => {
       );
       lastSearchList && setMovies(lastSearchList);
       setSavedMovies(currentSavedMovies.movies);
-      localStorage.getItem(
+      localStorage.setItem(
         'savedMoviesList',
         JSON.stringify(currentSavedMovies.movies)
       );
