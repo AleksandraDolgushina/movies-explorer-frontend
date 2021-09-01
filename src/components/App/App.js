@@ -569,7 +569,7 @@ function closeInfoPopup() {
 
 function handleSavedMovie(movie) {
   mainApi
-    .addMovie(movie)
+    .addMovies(movie)
     .then((res) => {
       const NewSavedMovies = [res.movie, ...savedMovies];
       setSavedMovies(NewSavedMovies);
