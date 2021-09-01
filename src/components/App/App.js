@@ -578,12 +578,12 @@ function handleSavedMovie(movie) {
 }
 
 function handleMovieDelete(movie) {
-  const movieForDelete = savedMovies.find((i) => i.movieId === movie.id);
+  const movieId = savedMovies.find((i) => i.movieId === movie.id)._id;
   mainApi
-    .deleteMovies(movieForDelete._id)
+    .deleteMovies(movieId)
     .then((res) => {
       const NewSavedMovies = savedMovies.filter(
-        (i) => i.movieId !== movie.id
+        (i) => i.movieId !== res.movie.id
       );
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));

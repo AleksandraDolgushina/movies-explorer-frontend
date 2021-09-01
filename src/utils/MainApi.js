@@ -67,7 +67,6 @@ class MainApi {
         const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/movies/${id}`, {
             method: 'DELETE',
-            credentials: 'include',
             headers: {
                 ...this._headers,
                 Authorization: `Bearer ${token}`,
