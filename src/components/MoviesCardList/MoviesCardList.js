@@ -1,7 +1,7 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
-import MovieContext from '../../contexts/MovieContext'
+import { MovieContext } from '../../contexts/MovieContext'
 
 function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick}) {
     const value = React.useContext(MovieContext);
