@@ -432,14 +432,14 @@ function isSavedMovie(movie) {
 const handleRegister = ({ name, email, password }, onSuccess) => {
   setIsSending(true);
   mainApi
-    .register({ name, email, password })
+    .register( name, email, password )
 
     .then((res) => {
       setCurrentUser(res);
       openSuccessPopup('Вы успешно зарегистрировались!');
       onSuccess();
       mainApi
-        .authorize({ email, password })
+        .authorize( email, password )
         .then((res) => {
           setCurrentUser(res);
           setLoggedIn(true);
@@ -463,7 +463,7 @@ const handleRegister = ({ name, email, password }, onSuccess) => {
 const handleLogin = ({ email, password }, onSuccess) => {
   setIsSending(true);
   mainApi
-    .authorize({ email, password })
+    .authorize( email, password )
     .then((res) => {
       setCurrentUser(res);
       setLoggedIn(true);
