@@ -433,7 +433,7 @@ React.useEffect(() => {
       );
       lastSearchList && setMovies(lastSearchList);
       setSavedMovies(currentSavedMovies.movies);
-      localStorage.setItem(
+      localStorage.getItem(
         'savedMoviesList',
         JSON.stringify(currentSavedMovies.movies)
       );
@@ -505,7 +505,7 @@ function searchMovies(name) {
     openErrorPopup('Нужно ввести ключевое слово');
     return;
   }
-  const MoviesList = JSON.parse(localStorage.getItem('movies'));
+  const MoviesList = JSON.parse(localStorage.getItem('initalMovies'));
   const lastSearchList = MoviesList.filter((movie) => {
     const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
     return (
@@ -527,7 +527,7 @@ function getMovieslist(name) {
     moviesApi
       .getMovies()
       .then((moviesData) => {
-        localStorage.setItem('movies', JSON.stringify(moviesData));
+        localStorage.setItem('initalMovies', JSON.stringify(moviesData));
         searchMovies(name);
       })
       .catch((err) => {

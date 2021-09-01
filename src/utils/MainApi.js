@@ -13,7 +13,6 @@ class MainApi {
     getUserMovies() {
         const token = localStorage.getItem('jwt')
         return fetch(`${this._address}/movies`, {
-            credentials: 'include',
             headers: {
                 ...this._headers,
                 Authorization: `Bearer ${token}`,
