@@ -282,7 +282,7 @@ const App = () => {
 
   function addMovie(movie) {
     mainApi
-      .addMovie(movie)
+      .addMovies(movie)
       .then((res) => {
         setSavedMovies([...savedMovies, { ...res, id: res.movieId }])
       })
