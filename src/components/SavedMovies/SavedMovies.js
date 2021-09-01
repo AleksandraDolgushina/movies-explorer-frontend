@@ -2,7 +2,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from '../Footer/Footer'
 import React from "react";
-import MovieContext from '../../contexts/MovieContext'
+import { MovieContext } from '../../contexts/MovieContext'
 import Preloader from "../Preloader/Preloader";
 
 function SavedMovies({
