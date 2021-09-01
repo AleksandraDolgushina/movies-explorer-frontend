@@ -595,7 +595,7 @@ function handleMovieDelete(movie) {
 
 function handleSavedMovieDelete(movie) {
   mainApi
-    .deleteMovie(movie._id)
+    .deleteMovies(movie._id)
     .then((res) => {
       const NewSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
       setSavedMovies(NewSavedMovies);
