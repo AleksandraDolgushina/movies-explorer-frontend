@@ -3,7 +3,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import './MoviesCardList.css'
 import { MovieContext } from '../../contexts/MovieContext';
 
-function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage}) {
+function MoviesCardList({isSavedMovies, onLikeClick, onDeleteClick, isSavedPage}) {
     const value = React.useContext(MovieContext);
     const movies = value.movies;
     const [extraPortion, setExtraPortion] = React.useState(3)
@@ -61,7 +61,7 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage})
                     <MoviesCard
                         movie={movie}
                         key={movie.movieId}
-                        isSavedMovies={isSavedMovie}
+                        isSavedMovies={isSavedMovies}
                         onLikeClick={onLikeClick}
                         onDeleteClick={onDeleteClick}
                     />
@@ -73,7 +73,7 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage})
                                 movie={movie}
                                 onLikeClick={onLikeClick}
                                 onDeleteClick={onDeleteClick}
-                                isSavedMovies={isSavedMovie}
+                                isSavedMovies={isSavedMovies}
                             />
                     ))}
             </div>
