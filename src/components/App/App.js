@@ -60,7 +60,7 @@ const App = () => {
       .register(name, email, password)
       .then((res) => {
         if (res) {
-          history.push('/signin')
+          history.push('/movies')
         }
       })
       .catch((err) => {
@@ -214,6 +214,7 @@ const App = () => {
   }, [loggedIn])
 
   function isSavedMovie(movie) {
+    console.log(savedMovies)
     return savedMovies.some((item) => item.id === movie.id)
   }
 
@@ -304,6 +305,13 @@ const App = () => {
         )}
 
         <Switch>
+          <Route path="/signup">
+            <Register handleRegister={handleRegister} />
+          </Route>
+
+          <Route path="/signin">
+            <Login handleLogin={handleLogin} />
+          </Route>
           <Route exact path="/">
             <Main />
           </Route>
@@ -345,13 +353,6 @@ const App = () => {
             onSignOut={handleSignOut}
           />
 
-          <Route path="/signup">
-            <Register handleRegister={handleRegister} />
-          </Route>
-
-          <Route path="/signin">
-            <Login handleLogin={handleLogin} />
-          </Route>
 
           <Route path="*">
             <PageNotFound />
