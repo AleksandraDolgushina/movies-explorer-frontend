@@ -78,6 +78,7 @@ function MoviesCardList({isSavedMovie, onLikeClick, onDeleteClick, isSavedPage})
                             movie={movie}
                             onLikeClick={onLikeClick}
                             isSavedMovies={isSavedMovie}
+                            onDeleteClick={onDeleteClick}
                         />
                     ))
                 }
