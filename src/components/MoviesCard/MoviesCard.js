@@ -25,7 +25,7 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
                 <img className="movie__image" src={`https://api.nomoreparties.co${movie.image.url}`} alt="Обложка фильма" />
             </Route>
             <Route path='/saved-movies'>
-            <img className="movie__image" src={movie.image} alt="Обложка фильма" />
+                <img className="movie__image" src={movie.movie.image} alt="Обложка фильма" />
             </Route>
             </a>
             <div className="movie__title">

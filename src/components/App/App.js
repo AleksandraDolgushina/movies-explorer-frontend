@@ -663,7 +663,7 @@ function handleSignOut(email) {
   localStorage.removeItem('jwt')
   setLoggedIn(false);
   setCurrentUser({ name: '', email: '' });
-  localStorage.removeItem('movies');
+  localStorage.removeItem('initalMovies');
   localStorage.removeItem('lastSearchList');
   localStorage.removeItem('savedMoviesList');
   setMovies([]);
