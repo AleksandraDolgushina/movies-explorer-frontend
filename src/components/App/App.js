@@ -568,7 +568,7 @@ function handleSavedMovie(movie) {
   mainApi
     .addMovies(movie)
     .then((res) => {
-      const NewSavedMovies = [res.movie, ...savedMovies];
+      const NewSavedMovies = [...savedMovies, { ...res, id: res.movieId }];
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
     })
@@ -578,13 +578,13 @@ function handleSavedMovie(movie) {
 }
 
 function handleMovieDelete(movie) {
-  const movieId = savedMovies.find((i) => i.movieId === movie.id)._id;
+  const movieId = savedMovies.find((i) => i.id === movie.id)._id;
   console.log(movieId)
   mainApi
     .deleteMovies(movieId)
     .then((res) => {
       const NewSavedMovies = savedMovies.filter(
-        (i) => i.movieId !== res.movie.id
+        (i) => i.movieId !== res.movieId
       );
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
