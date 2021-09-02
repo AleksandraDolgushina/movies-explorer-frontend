@@ -4,9 +4,7 @@ import './MoviesCard.css'
 
 function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
     const isSaved = isSavedMovies(movie);
-    const cardLikeButtonClasName = (
-        `movie__like ${isSaved && 'movie__like_active'}`
-    );
+
 
     function handleLikeClick() {
         onLikeClick(movie)
