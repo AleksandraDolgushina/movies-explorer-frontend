@@ -10,15 +10,18 @@ function Profile({onSaveProfile, onSignOut}) {
         errors,
         isValid,
         handleChange
-      } = useFormWithValidation({})
+    } = useFormWithValidation({})
+    const { name, email } = values;
 
     function handleSignOut() {
-        onSignOut()
+        onSignOut({
+            email: currentUser.email,
+        })
     }
     
     function handleOnSubmit(evt) {
         evt.preventDefault()
-        onSaveProfile(values)
+        onSaveProfile({ name, email })
     }
 
     return (
