@@ -63,9 +63,9 @@ class MainApi {
         .then(this._handleResponse)
     };
 
-    deleteMovies(id) {
+    deleteMovies(_id) {
         const token = localStorage.getItem('jwt')
-        return fetch(`${this._address}/movies/${id}`, {
+        return fetch(`${this._address}/movies/${_id}`, {
             method: 'DELETE',
             headers: {
                 ...this._headers,
