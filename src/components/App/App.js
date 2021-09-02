@@ -587,7 +587,7 @@ function handleMovieDelete(movie) {
       );
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
-      localStorage.getItem('savedMovies', JSON.stringify(NewSavedMovies));
+      JSON.parse(localStorage.getItem('savedMovies'))
     })
     .catch((err) => {
       console.log(err);
@@ -601,7 +601,7 @@ function handleSavedMovieDelete(movie) {
       const NewSavedMovies = savedMovies.filter((i) => i._id !== res._id);
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
-      localStorage.getItem('savedMovies', JSON.stringify(NewSavedMovies));
+      JSON.parse(localStorage.getItem('savedMovies'))
     })
     .catch((err) => {
       console.log(err);
