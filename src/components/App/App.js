@@ -587,26 +587,24 @@ function handleMovieDelete(movie) {
       );
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
-      JSON.parse(localStorage.getItem('savedMovies'))
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-function handleSavedMovieDelete(movie) {
-  mainApi
-    .deleteMovies(movie._id)
-    .then((res) => {
-      const NewSavedMovies = savedMovies.filter((i) => i._id !== res._id);
-      setSavedMovies(NewSavedMovies);
-      localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
-      JSON.parse(localStorage.getItem('savedMovies'))
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
+// function handleSavedMovieDelete(movie) {
+//   mainApi
+//     .deleteMovies(movie._id)
+//     .then((res) => {
+//       const NewSavedMovies = savedMovies.filter((i) => i._id !== res._id);
+//       setSavedMovies(NewSavedMovies);
+//       localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }
 
 function handleToggleShortSavedMovies() {
   !isShortSasvedMovies
@@ -714,7 +712,7 @@ return (
             component={SavedMovies}
             isLoading={isLoading}
             loggedIn={loggedIn}
-            onDeleteClick={handleSavedMovieDelete}
+            onDeleteClick={handleMovieDelete}
             isSavedMovie={isSavedMovie}
             onFilterShort={handleToggleShortSavedMovies}
             getMovies={searchSavedMovies}

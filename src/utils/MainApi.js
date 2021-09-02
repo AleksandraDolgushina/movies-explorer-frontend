@@ -72,9 +72,7 @@ class MainApi {
                 Authorization: `Bearer ${token}`,
             },
         })
-        .then(response => response.ok
-            ? Promise.resolve('success')
-            : Promise.reject(`Ошибка ${response.status}`))
+        .then(this._handleResponse)
     };
       
     register( name, email, password ) {
