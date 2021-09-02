@@ -30,10 +30,10 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
             <div className="movie__title">
                 <h2 className="movie__name">{movie.nameRU}</h2>
                 <Route path='/movies'>
-                    <button className={cardLikeButtonClassName} onClick={isSaved ? handleDeleteClick : handleLikeClick}></button>
+                    <button className={cardLikeButtonClassName} type='button' onClick={isSaved ? handleDeleteClick : handleLikeClick}></button>
                 </Route>
                 <Route path='/saved-movies'>
-                    <button className="movie__delete" onClick={handleDeleteClick}></button>
+                    <button className="movie__delete" type='button' onClick={handleDeleteClick}></button>
                 </Route>
             </div>
             <p className="movie__duration">{movie.duration}</p>
