@@ -660,22 +660,15 @@ function handleUpdateProfile({ name, email }) {
 }
 
 function handleSignOut(email) {
-  mainApi
-    .logout({email})
-    .then(() => {
-      setLoggedIn(false);
-      setCurrentUser({ name: '', email: '' });
-      localStorage.removeItem('jwt')
-      localStorage.removeItem('movies');
-      localStorage.removeItem('lastSearchList');
-      localStorage.removeItem('savedMoviesList');
-      setMovies([]);
-      setSavedMovies([]);
-      history.push('/');
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  localStorage.removeItem('jwt')
+  setLoggedIn(false);
+  setCurrentUser({ name: '', email: '' });
+  localStorage.removeItem('movies');
+  localStorage.removeItem('lastSearchList');
+  localStorage.removeItem('savedMoviesList');
+  setMovies([]);
+  setSavedMovies([]);
+  history.push('/');
 }
 
 return (

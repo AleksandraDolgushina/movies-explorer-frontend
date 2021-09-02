@@ -75,15 +75,15 @@ class MainApi {
         .then(this._handleResponse)
     };
 
-    logout({ email }) {
-        return fetch(`${this._address}/signout`, {
-          method: 'POST',
-          headers: this._headers,
-          body: JSON.stringify({
-            email: email,
-          }),
-        }).then(this._handleResponse);
-      };
+    // logout({ email }) {
+    //     return fetch(`${this._address}/signout`, {
+    //       method: 'POST',
+    //       headers: this._headers,
+    //       body: JSON.stringify({
+    //         email: email,
+    //       }),
+    //     }).then(this._handleResponse);
+    //   };
       
     register( name, email, password ) {
         return fetch(`${this._address}/signup`, {
