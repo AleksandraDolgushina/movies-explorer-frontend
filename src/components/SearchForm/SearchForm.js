@@ -6,7 +6,7 @@ import React from 'react'
 import useFormValidation from '../../hooks/useFormValidation';
 
 function SearchForm({getMovies, onFilterShort, isLoading}) {
-    const { values, handleChange, resetForm, errors, isValid } = useFormValidation ();
+    const { values, handleChange, resetForm, isValid } = useFormValidation ();
     const { name } = values;
 
     function handleOnSubmit(evt) {

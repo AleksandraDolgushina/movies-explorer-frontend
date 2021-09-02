@@ -1,10 +1,9 @@
 import './App.css';
-import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import {  Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import { MovieContext } from '../../contexts/MovieContext'
 import Main from '../Main/Main'
 import Header from '../Header/Header';
 import Movies from '../Movies/Movies'
-//import SavedMovies from '../SavedMovies/SavedMovies'
 import Profile from '../Profile/Profile'
 import Login from '../Login/Login'
 import Register from '../Register/Register'
@@ -18,358 +17,6 @@ import Popup from '../Popup/Popup'
 import SavedMovies from '../SavedMovies/SavedMovies';
 
 const App = () => {
-
-//   const [isLoading, setIsLoading] = React.useState(false)
-//   const [loadingError, setLoadingError] = React.useState('')
-//   const [currentUser, setCurrentUser] = React.useState({})
-//   const [loggedIn, setLoggedIn] = React.useState(false)
-//   const history = useHistory()
-//   const [initialMovies, setInitialMovies] = React.useState([])
-//   const [savedMovies, setSavedMovies] = React.useState([])
-//   const [filterMovies, setFilterMovies] = React.useState([])
-//   const [filterSavedMovies, setFilterSavedMovies] = React.useState([])
-//   const [query, setQuery] = React.useState('')
-//   let location = useLocation()
-//   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false)
-//   const [textPopup, setTextPopup] = React.useState('')
-      
-//   React.useEffect(() => {
-//     const path = location.pathname
-//     const token = localStorage.getItem('jwt')
-//     if (token) {
-//       mainApi
-//       .checkToken(token)
-//       .then((res) => {
-//       if (res) {
-//         setLoggedIn(true)
-//         getCurrentUser()
-//         history.push(path)
-//       }
-//     })
-//       .catch((err) => {
-//         console.log(err)
-//         localStorage.removeItem('jwt')
-//         history.push('/')
-//       })
-//     }
-//   }, [])
-
-//   function handleRegister({ name, email, password }) {
-//     if (!name || !email || !password) {
-//       return
-//     }
-//     mainApi
-//       .register(name, email, password)
-//       .then((res) => {
-//         if (res) {
-//           history.push('/movies')
-//         }
-//       })
-//       .catch((err) => {
-//         if (err.status === 409) {
-//           setTextPopup('Пользователь с таким email уже существует')
-//           setIsInfoPopupOpen(true)
-//         } else {
-//           setTextPopup('При регистрации пользователя произошла ошибка')
-//           setIsInfoPopupOpen(true)
-//         }
-//       })
-//   }
-
-//   function handleLogin({email, password}) {
-//     if (!email || !password) {
-//       return
-//     }
-//     mainApi
-//       .authorize(email, password)
-//       .then((res) => {
-//         if (res.token) {
-//           localStorage.setItem('jwt', res.token)
-//           setLoggedIn(true)
-//           getCurrentUser()
-//           history.push('/movies')
-//         }
-//       })
-//       .catch((err) => {
-//         if (err.status === 400) {
-//           setTextPopup('Неверный email или пароль')
-//           setIsInfoPopupOpen(true)
-//         } else {
-//           setTextPopup('При авторизации произошла ошибка')
-//           setIsInfoPopupOpen(true)
-//         }
-//       })
-//   }
-  
-//   function getCurrentUser() {
-//     const token = localStorage.getItem('jwt')
-//     mainApi
-//       .getCurrentUser(token)
-//       .then((res) => {
-//           if (res) {
-//               setCurrentUser(res)
-//               localStorage.setItem('currentUser', JSON.stringify(res))
-//         }
-//       })
-//       .catch((err) => {
-//         console.log(err)
-//       })
-//   }
-  
-//   function handleSaveProfile(data) {
-//     mainApi
-//       .editUser(data)
-//       .then((profile) => {
-//         setCurrentUser(profile)
-//         setTextPopup('Профиль обновлен')
-//         setIsInfoPopupOpen(true)
-//       })
-//       .catch((err) => {
-//         if (err.status === 409) {
-//           setTextPopup('Пользователь с таким email уже существует')
-//         } else {
-//           setTextPopup('При обновлении профиля произошла ошибка')
-//         }
-//         setIsInfoPopupOpen(true)
-//       })
-//     }
-
-//     function handleSignOut() {
-//       localStorage.removeItem('jwt')
-//       localStorage.removeItem('currentUser')
-//     setLoggedIn(false)
-//     setCurrentUser({})
-    
-//     localStorage.removeItem('initialMovies')
-//     localStorage.removeItem('savedMovies')
-//     setInitialMovies([])
-//     setSavedMovies([])
-//     setFilterMovies([])
-//     setFilterSavedMovies([])
-    
-//     history.push('/')
-//   }
-  
-  
-//   function getInitialMovies() {
-//     moviesApi
-//     .getMovies()
-//     .then((data) => {
-//       const initialArray = data.map((item) => {
-//         const imageURL = item.image ? item.image.url : ''
-//         return {
-//           ...item,
-//           image: `https://api.nomoreparties.co${imageURL}`,
-//           trailer: item.trailerLink,
-//         }
-//       })
-      
-//       localStorage.setItem('initialMovies', JSON.stringify(initialArray))
-//       setInitialMovies(initialArray)
-//     })
-//     .catch((err) => {
-//       setLoadingError(
-//         'Введите ключевое слово'
-//         )
-//       })
-//     }
-    
-//     function getSavedMovies() {
-//       mainApi
-//       .getUserMovies()
-//       .then((data) => {
-//         const savedArray = data.map((item) => {
-//           return { ...item, id: toString(item.movieId) }
-//         })
-//         localStorage.setItem('savedMovies', JSON.stringify(savedArray))
-//         setSavedMovies(savedArray)
-//       })
-//       .catch((err) => {
-//         localStorage.removeItem('savedMovies')
-//         setLoadingError(
-//           'Введите ключевое слово'
-//         )
-//       })
-//     }
-    
-//     React.useEffect(() => {
-//       const initial = JSON.parse(localStorage.getItem('initialMovies'))
-//       if (initial) {
-//         setInitialMovies(initial)
-//       } else {
-//         getInitialMovies()
-//       }
-  
-//       const saved = JSON.parse(localStorage.getItem('savedMovies'))
-//       if (saved) {
-//         setSavedMovies(saved)
-//       } else {
-//         getSavedMovies()
-//       }
-//     }, [])
-
-//   React.useEffect(() => {
-//     if (loggedIn) {
-//       getInitialMovies()
-//       getSavedMovies()
-//     }
-//   }, [loggedIn])
-
-//   function isSavedMovie(movie) {
-//     console.log(savedMovies)
-//     return savedMovies.some((item) => item.id === movie.id)
-//   }
-
-//   function filter(data, query) {
-//     if (query) {
-//       const regex = new RegExp(query, 'gi')
-//       const filterData = data.filter((item) => {
-//         return regex.test(item.nameRU) || regex.test(item.nameEN)
-//       })
-      
-//       if (filterData.length === 0) {
-//         setLoadingError('Ничего не найдено')
-//       } else {
-//         setLoadingError('')
-//       }
-//       return filterData
-//     }
-//     return []
-//   }
-
-//   function onSubmitSearch(query) {
-//     setIsLoading(true)
-//     setTimeout(() => {
-//       setQuery(query)
-//       setFilterMovies(filter(initialMovies, query))
-//       setIsLoading(false)
-//     }, 500)
-//   }
-
-//   function onSubmitSearchSaved(query) {
-//     setIsLoading(true)
-//     setTimeout(() => {
-//       setQuery(query)
-//       setFilterSavedMovies(filter(savedMovies, query))
-//       setIsLoading(false)
-//     }, 500)
-//   }
-
-//   function onLikeClick(movie, isMarked) {
-//     if (isMarked) {
-//       addMovie(movie)
-//     } else {
-//       deleteMovie(movie)
-//     }
-//   }
-
-//   function deleteMovie(movie) {
-//     const movieId = savedMovies.find((item) => item.id === movie.id)._id
-//     mainApi
-//       .deleteMovies(movieId)
-//       .then((res) => {
-//         if (res) {
-//           const newArray = savedMovies.filter(
-//             (item) => item.movieId !== res.movieId
-//           )
-//           setSavedMovies(newArray)
-//         }
-//       })
-//       .catch((err) => {
-//         setTextPopup('На сервере произошла ошибка')
-//         setIsInfoPopupOpen(true)
-//       })
-//   }
-
-//   function addMovie(movie) {
-//     mainApi
-//       .addMovies(movie)
-//       .then((res) => {
-//         setSavedMovies([...savedMovies, { ...res, id: res.movieId }])
-//         localStorage.setItem('savedMovies', JSON.stringify(savedMovies))
-//       })
-//       .catch((err) => {
-//         setTextPopup('На сервере произошла ошибка')
-//         setIsInfoPopupOpen(true)
-//       })
-//   }
-
-//   function onClosePopup() {
-//     setIsInfoPopupOpen(false)
-//     setTextPopup('')
-//   }
-
-//   return (
-//     <div className="page">
-//       <CurrentUserContext.Provider value={currentUser}>
-//         {(loggedIn || location.pathname === '/') && (
-//           <Header loggedIn={loggedIn} />
-//         )}
-
-//         <Switch>
-//           <Route path="/signup">
-//             <Register handleRegister={handleRegister} />
-//           </Route>
-
-//           <Route path="/signin">
-//             <Login handleLogin={handleLogin} />
-//           </Route>
-//           <Route exact path="/">
-//             <Main />
-//           </Route>
-
-//           <ProtectedRoute
-//             exact
-//             path="/movies"
-//             loggedIn={loggedIn}
-//             isLoading={isLoading}
-//             loadingError={loadingError}
-//             component={Movies}
-//             savedMovies={false}
-//             movies={filterMovies}
-//             onSubmitSearch={onSubmitSearch}
-//             onLikeClick={onLikeClick}
-//             isSavedMovie={isSavedMovie}
-//           />
-
-//           <ProtectedRoute
-//             exact
-//             path="/saved-movies"
-//             loggedIn={loggedIn}
-//             isLoading={isLoading}
-//             loadingError={loadingError}
-//             component={Movies}
-//             savedMovies={true}
-//             movies={filterSavedMovies}
-//             onSubmitSearch={onSubmitSearchSaved}
-//             onLikeClick={onLikeClick}
-//             isSavedMovie={isSavedMovie}
-//           />
-
-//           <ProtectedRoute
-//             exact
-//             path="/profile"
-//             loggedIn={loggedIn}
-//             component={Profile}
-//             onSaveProfile={handleSaveProfile}
-//             onSignOut={handleSignOut}
-//           />
-
-
-//           <Route path="*">
-//             <PageNotFound />
-//           </Route>
-//         </Switch>
-
-//         <Popup
-//           title={textPopup}
-//           isOpenPopup={isInfoPopupOpen}
-//           onClosePopup={onClosePopup}
-//         />
-//       </CurrentUserContext.Provider>
-//     </div>
-//   )
-// }
 
   const history = useHistory();
   const [currentUser, setCurrentUser] = React.useState({});
@@ -405,6 +52,20 @@ const App = () => {
     }
   }, [])
 
+  function handleInfoPopupClick() {
+    setIsInfoPopupOpen(true);
+  }
+
+  function openErrorPopup(title) {
+    handleInfoPopupClick();
+    setInfoPopupTitle({ title });
+  }
+
+  function openSuccessPopup(title) {
+    handleInfoPopupClick();
+    setInfoPopupTitle({ title });
+  }
+
   React.useEffect(() => {
     Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
       .then(([currentUserData, currentSavedMovies]) => {
@@ -439,8 +100,7 @@ const App = () => {
       .register( name, email, password )
       .then((res) => {
         setCurrentUser(res);
-        setIsInfoPopupOpen(true)
-        setInfoPopupTitle('Вы успешно зарегистрировались!');
+        openSuccessPopup('Вы успешно зарегистрировались!');
         mainApi
           .authorize( email, password )
           .then((res) => {
@@ -451,19 +111,16 @@ const App = () => {
           })
           .catch((err) => {
             if (err.status === 409) {
-              setIsInfoPopupOpen(true);
-              setInfoPopupTitle('Пользователь с таким email уже существует')
+              openErrorPopup('Пользователь с таким email уже существует')
             } else {
-              setIsInfoPopupOpen(true);
-              setInfoPopupTitle('При регистрации пользователя произошла ошибка')
+              openErrorPopup('При регистрации пользователя произошла ошибка')
             }
           });
         history.push('/movies');
       })
       .catch((err) => {
         console.log(err);
-        setIsInfoPopupOpen(true);
-        setInfoPopupTitle('Что-то пошло не так! Попробуйте ещё раз.');
+        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
       })
   };
 
@@ -481,19 +138,17 @@ const App = () => {
       })
       .catch((err) => {
         if (err.status === 400) {
-          setIsInfoPopupOpen(true);
-          setInfoPopupTitle('Неверный email или пароль')
+          openErrorPopup('Неверный email или пароль')
         } else {
-          setIsInfoPopupOpen(true);
-          setInfoPopupTitle('При авторизации произошла ошибка')
+          openErrorPopup('При авторизации произошла ошибка')
         }
+        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
       });
   };
 
   function searchMovies(name) {
     if (!name) {
-      setIsInfoPopupOpen(true);
-      setInfoPopupTitle('Нужно ввести ключевое слово');
+      openErrorPopup('Нужно ввести ключевое слово');
       return;
     }
     const moviesList = JSON.parse(localStorage.getItem('initalMovies'));
@@ -508,7 +163,7 @@ const App = () => {
     setMovies(lastSearchList);
     localStorage.setItem('lastSearchList', JSON.stringify(lastSearchList));
     lastSearchList.length === 0 &&
-      setTimeout(() => setInfoPopupTitle('Ничего не найдено'), setIsInfoPopupOpen(true), 1200);
+      setTimeout(() => openErrorPopup('Ничего не найдено'), 1200);
     return lastSearchList;
   }
 
@@ -522,8 +177,7 @@ const App = () => {
           searchMovies(name);
         })
         .catch((err) => {
-          setIsInfoPopupOpen(true);
-          setInfoPopupTitle(
+          openErrorPopup(
             'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз'
           );
         })
@@ -536,8 +190,7 @@ const App = () => {
   function searchSavedMovies(name) {
     const savedMoviesList = JSON.parse(localStorage.getItem('savedMovies'));
     if (!name) {
-      setIsInfoPopupOpen(true);
-      setInfoPopupTitle('Нужно ввести ключевое слово');
+      openErrorPopup('Нужно ввести ключевое слово');
       return;
     }
     if (savedMoviesList) {
@@ -636,17 +289,14 @@ const App = () => {
             name: res.name,
             email: res.email,
           });
-          setIsInfoPopupOpen(true);
-          setInfoPopupTitle('Данные успешно обновлены!');
+          openSuccessPopup('Данные успешно обновлены!');
         }
       })
       .catch((err) => {
         if (err.status === 409) {
-          setIsInfoPopupOpen(true);
-          setInfoPopupTitle('Пользователь с таким email уже существует')
+          openErrorPopup('Пользователь с таким email уже существует')
         } else {
-          setIsInfoPopupOpen(true);
-          setInfoPopupTitle('При обновлении профиля произошла ошибка')
+          openErrorPopup('При обновлении профиля произошла ошибка')
         }
       })
       .finally(() => {
