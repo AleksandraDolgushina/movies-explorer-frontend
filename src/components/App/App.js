@@ -593,18 +593,18 @@ function handleMovieDelete(movie) {
     });
 }
 
-// function handleSavedMovieDelete(movie) {
-//   mainApi
-//     .deleteMovies(movie._id)
-//     .then((res) => {
-//       const NewSavedMovies = savedMovies.filter((i) => i._id !== res._id);
-//       setSavedMovies(NewSavedMovies);
-//       localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// }
+function handleSavedMovieDelete(movie) {
+  mainApi
+    .deleteMovies(movie._id)
+    .then((res) => {
+      const NewSavedMovies = savedMovies.filter((i) => i._id !== res._id);
+      setSavedMovies(NewSavedMovies);
+      localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 function handleToggleShortSavedMovies() {
   !isShortSasvedMovies
@@ -712,7 +712,7 @@ return (
             component={SavedMovies}
             isLoading={isLoading}
             loggedIn={loggedIn}
-            onDeleteClick={handleMovieDelete}
+            onDeleteClick={handleSavedMovieDelete}
             isSavedMovie={isSavedMovie}
             onFilterShort={handleToggleShortSavedMovies}
             getMovies={searchSavedMovies}
