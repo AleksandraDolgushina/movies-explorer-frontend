@@ -434,7 +434,7 @@ React.useEffect(() => {
       lastSearchList && setMovies(lastSearchList);
       setSavedMovies(currentSavedMovies.movies);
       localStorage.setItem(
-        'savedMoviesList',
+        'savedMovies',
         JSON.stringify(currentSavedMovies.movies)
       );
     })
@@ -542,7 +542,7 @@ function getMovieslist(name) {
 }
 
 function searchSavedMovies(name) {
-  const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
+  const savedMoviesList = JSON.parse(localStorage.getItem('savedMovies'));
   if (!name) {
     openErrorPopup('Нужно ввести ключевое слово');
     return;
@@ -570,7 +570,7 @@ function handleSavedMovie(movie) {
     .then((res) => {
       const NewSavedMovies = [res.movie, ...savedMovies];
       setSavedMovies(NewSavedMovies);
-      localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
+      localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
     })
     .catch((err) => {
       console.log(err);
@@ -587,7 +587,7 @@ function handleMovieDelete(movie) {
         (i) => i.movieId !== res.movieId
       );
       setSavedMovies(NewSavedMovies);
-      localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
+      localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
     })
     .catch((err) => {
       console.log(err);
@@ -601,7 +601,7 @@ function handleSavedMovieDelete(movie) {
       const NewSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
       console.log(NewSavedMovies)
       setSavedMovies(NewSavedMovies);
-      localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
+      localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
     })
     .catch((err) => {
       console.log(err);
@@ -626,7 +626,7 @@ React.useEffect(() => {
 }, [isShortMovies]);
 
 React.useEffect(() => {
-  const savedMoviesList = JSON.parse(localStorage.getItem('savedMoviesList'));
+  const savedMoviesList = JSON.parse(localStorage.getItem('savedMovies'));
   isShortSasvedMovies
     ? setSavedMovies((state) =>
         state.filter((i) => i.duration <= 40)
@@ -665,7 +665,7 @@ function handleSignOut(email) {
   setCurrentUser({ name: '', email: '' });
   localStorage.removeItem('initalMovies');
   localStorage.removeItem('lastSearchList');
-  localStorage.removeItem('savedMoviesList');
+  localStorage.removeItem('savedMovies');
   setMovies([]);
   setSavedMovies([]);
   setIsShortMovies([]);
