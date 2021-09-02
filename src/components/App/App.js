@@ -394,9 +394,9 @@ let location = useLocation()
       mainApi
       .checkToken(token)
       .then((res) => {
-      if (res) {
-        setLoggedIn(true)
-        history.push(path)
+        if (res) {
+          setLoggedIn(true)
+          history.push(path)
       }
     })
       .catch((err) => {
@@ -427,7 +427,6 @@ React.useEffect(() => {
   Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
     .then(([currentUserData, currentSavedMovies]) => {
       setCurrentUser(currentUserData);
-      localStorage.setItem('currentUser', JSON.stringify(currentUserData))
       setLoggedIn(true);
       const lastSearchList = JSON.parse(
         localStorage.getItem('lastSearchList')
@@ -664,7 +663,6 @@ function handleSignOut(email) {
   setLoggedIn(false);
   setCurrentUser({ name: '', email: '' });
   setSavedMovies([])
-  localStorage.removeItem('currentUser')
   localStorage.removeItem('jwt')
   localStorage.removeItem('initalMovies');
   localStorage.removeItem('lastSearchList');

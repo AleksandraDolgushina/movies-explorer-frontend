@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import './MoviesCard.css'
 
 function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
-    const { nameRU, duration, trailer } = movie;
     const isSaved = isSavedMovies(movie);
     const cardLikeButtonClassName = (
         `movie__like ${isSaved && 'movie__like_active'}`
@@ -20,7 +19,7 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
 
     return (
         <div className="movie">
-            <a href={trailer} target="_blank" className="movie__image" rel="noreferrer">
+            <a href={movie.trailer} target="_blank" className="movie__image" rel="noreferrer">
             <Route path='/movies'>
                 <img className="movie__image" src={`https://api.nomoreparties.co${movie.image.url}`} alt="Обложка фильма" />
             </Route>
@@ -29,7 +28,7 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
             </Route>
             </a>
             <div className="movie__title">
-                <h2 className="movie__name">{nameRU}</h2>
+                <h2 className="movie__name">{movie.nameRU}</h2>
                 <Route path='/movies'>
                     <button className={cardLikeButtonClassName} onClick={isSaved ? handleDeleteClick : handleLikeClick}></button>
                 </Route>
@@ -37,7 +36,7 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
                     <button className="movie__delete" onClick={handleDeleteClick}></button>
                 </Route>
             </div>
-            <p className="movie__duration">{duration}</p>
+            <p className="movie__duration">{movie.duration}</p>
         </div>
     )
 }
