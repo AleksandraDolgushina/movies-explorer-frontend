@@ -432,11 +432,11 @@ React.useEffect(() => {
         localStorage.getItem('lastSearchList')
       );
       lastSearchList && setMovies(lastSearchList);
-      setSavedMovies(currentSavedMovies.movies);
-      localStorage.setItem(
-        'savedMovies',
-        JSON.stringify(currentSavedMovies.movies)
-      );
+      // setSavedMovies(currentSavedMovies.movies);
+      // localStorage.setItem(
+      //   'savedMovies',
+      //   JSON.stringify(currentSavedMovies.movies)
+      // );
     })
     .catch((err) => console.log(err));
 }, []);
