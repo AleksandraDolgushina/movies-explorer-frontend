@@ -6,8 +6,6 @@ import './Register.css'
 function Register({handleRegister}) {
     const {
         values,
-        errors,
-        isValid,
         handleChange,
         resetForm,
       } = useFormWithValidation({})
