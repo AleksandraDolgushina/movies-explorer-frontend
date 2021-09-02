@@ -97,7 +97,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import { MovieContext } from '../../contexts/MovieContext';
 
-function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovies }) {
+function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovie }) {
   const value = React.useContext(MovieContext);
   const movies = value.movies;
   const savedMovies = value.savedMovies;
@@ -153,7 +153,7 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovies }) {
                     movie={movie}
                     onLikeClick={onLikeClick}
                     onDeleteClick={onDeleteClick}
-                    isSavedMovies={isSavedMovies}
+                    isSavedMovies={isSavedMovie}
                   />
                 ))}
             {movies.length <= count &&
@@ -163,7 +163,7 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovies }) {
                   movie={movie}
                   onLikeClick={onLikeClick}
                   onDeleteClick={onDeleteClick}
-                  isSavedMovies={isSavedMovies}
+                  isSavedMovies={isSavedMovie}
                 />
               ))}
           </section>
@@ -189,7 +189,7 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovies }) {
                     key={movie.movieId}
                     movie={movie}
                     onDeleteClick={onDeleteClick}
-                    isSavedMovies={isSavedMovies}
+                    isSavedMovies={isSavedMovie}
                   />
                 ))}
             {savedMovies.length <= count &&
@@ -198,7 +198,7 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovies }) {
                   key={movie.movieId}
                   movie={movie}
                   onDeleteClick={onDeleteClick}
-                  isSavedMovies={isSavedMovies}
+                  isSavedMovies={isSavedMovie}
                 />
               ))}
           </section>
