@@ -568,7 +568,7 @@ function handleSavedMovie(movie) {
   mainApi
     .addMovies(movie)
     .then((res) => {
-      const NewSavedMovies = [...savedMovies, { ...res, id: res.movieId }];
+      const NewSavedMovies = [...savedMovies, { ...res, id: res.movie.movieId }];
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMoviesList', JSON.stringify(NewSavedMovies));
     })
