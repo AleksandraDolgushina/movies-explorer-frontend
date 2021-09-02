@@ -57,7 +57,7 @@ class MainApi {
                 trailer: data.trailerLink,
                 year: data.year,
                 thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
-                id: data.id.toString(),
+                movieId: data.id.toString(),
             })
         })
         .then(this._handleResponse)

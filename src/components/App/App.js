@@ -578,7 +578,7 @@ function handleSavedMovie(movie) {
 }
 
 function handleMovieDelete(movie) {
-  const movieId = savedMovies.find((i) => i.movieId === movie.id)._id;
+  const movieId = savedMovies.find((i) => i.id === movie.id)._id;
   mainApi
     .deleteMovies(movieId)
     .then((res) => {
