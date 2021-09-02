@@ -18,13 +18,13 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
 
     return (
         <div className="movie">
-            <a href={movie.trailer} target="_blank" className="movie__image" rel="noreferrer">
-            <Route path='/movies'>
-                <img className="movie__image" src={`https://api.nomoreparties.co${movie.image.url}`} alt="Обложка фильма" />
-            </Route>
-            <Route path='/saved-movies'>
-                <img className="movie__image" src={movie.image} alt="Обложка фильма" />
-            </Route>
+            <a href={movie.trailerLink} target="_blank" className="movie__image" rel="noreferrer">
+                <Route path='/movies'>
+                    <img className="movie__image" src={`https://api.nomoreparties.co${movie.image.url}`} alt="Обложка фильма" />
+                </Route>
+                <Route path='/saved-movies'>
+                    <img className="movie__image" src={movie.image} alt="Обложка фильма" />
+                </Route>
             </a>
             <div className="movie__title">
                 <h2 className="movie__name">{movie.nameRU}</h2>
