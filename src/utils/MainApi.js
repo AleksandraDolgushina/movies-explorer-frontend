@@ -47,7 +47,7 @@ class MainApi {
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-                country: data.country,
+                country: data.country ? data.country : "null",
                 description: data.description,
                 director: data.director,
                 duration: data.duration,
