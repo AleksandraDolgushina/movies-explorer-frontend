@@ -427,6 +427,7 @@ React.useEffect(() => {
   Promise.all([mainApi.getCurrentUser(), mainApi.getUserMovies()])
     .then(([currentUserData, currentSavedMovies]) => {
       setCurrentUser(currentUserData);
+      localStorage.setItem('currentUser', JSON.stringify(currentUserData))
       setLoggedIn(true);
       const lastSearchList = JSON.parse(
         localStorage.getItem('lastSearchList')
@@ -660,10 +661,11 @@ function handleUpdateProfile({ name, email }) {
 }
 
 function handleSignOut(email) {
-  localStorage.removeItem('jwt')
   setLoggedIn(false);
   setCurrentUser({ name: '', email: '' });
   setSavedMovies([])
+  localStorage.removeItem('currentUser')
+  localStorage.removeItem('jwt')
   localStorage.removeItem('initalMovies');
   localStorage.removeItem('lastSearchList');
   localStorage.removeItem('savedMovies');
