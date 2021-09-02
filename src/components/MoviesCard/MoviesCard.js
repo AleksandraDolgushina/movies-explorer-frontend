@@ -8,8 +8,7 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
         `movie__like ${isSaved && 'movie__like_active'}`
     );
 
-    function handleLikeClick(evt) {
-        evt.preventDefault()
+    function handleLikeClick() {
         onLikeClick(movie)
     }
 
