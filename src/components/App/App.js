@@ -668,6 +668,8 @@ function handleSignOut(email) {
   localStorage.removeItem('savedMoviesList');
   setMovies([]);
   setSavedMovies([]);
+  setIsShortMovies([]);
+  setIsShortSasvedMovies([]);
   history.push('/');
 }
 
