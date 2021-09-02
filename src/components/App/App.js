@@ -665,6 +665,7 @@ function handleSignOut(email) {
     .then(() => {
       setLoggedIn(false);
       setCurrentUser({ name: '', email: '' });
+      localStorage.removeItem('jwt')
       localStorage.removeItem('movies');
       localStorage.removeItem('lastSearchList');
       localStorage.removeItem('savedMoviesList');
