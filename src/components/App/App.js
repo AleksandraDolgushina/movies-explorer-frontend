@@ -597,7 +597,7 @@ function handleSavedMovieDelete(movie) {
   mainApi
     .deleteMovies(movie._id)
     .then((res) => {
-      const NewSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
+      const NewSavedMovies = savedMovies.filter((i) => i._id !== res._id);
       setSavedMovies(NewSavedMovies);
       localStorage.setItem('savedMovies', JSON.stringify(NewSavedMovies));
     })

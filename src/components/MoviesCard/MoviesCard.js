@@ -4,7 +4,9 @@ import './MoviesCard.css'
 
 function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
     const isSaved = isSavedMovies(movie);
-
+    const cardLikeButtonClassName = (
+        `movie__like ${isSaved && 'movie__like_active'}`
+    );
 
     function handleLikeClick() {
         onLikeClick(movie)
@@ -27,7 +29,7 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
             <div className="movie__title">
                 <h2 className="movie__name">{movie.nameRU}</h2>
                 <Route path='/movies'>
-                    <button className={isSaved ? 'movie__like_active' : 'movie__like'} type='button' onClick={isSaved ? handleDeleteClick : handleLikeClick}></button>
+                    <button className={cardLikeButtonClassName} type='button' onClick={isSaved ? handleDeleteClick : handleLikeClick}></button>
                 </Route>
                 <Route path='/saved-movies'>
                     <button className="movie__delete" type='button' onClick={handleDeleteClick}></button>
