@@ -16,8 +16,6 @@ function Header({ loggedIn }) {
 
     return (
         <section className="header">
-            <div className="header__main">
-            </div>
             <div className="header__other">
                 {loggedIn ? (
                     <Route path={['/', '/movies', '/saved-movies', '/profile']}>
@@ -36,16 +34,18 @@ function Header({ loggedIn }) {
                         </nav>
                         </div>
                     </Route>
-                ) : (                
-                    <Route exact path='/'>
-                        <Link to="/" >
-                            <img className="link header__logo" src={logo} alt="Логотип"/>
-                        </Link>
-                        <nav className="header__container">
-                            <NavLink to="/signup" className="link header__signup">Регистрация</NavLink>
-                            <NavLink to="/signin" className="link header__signin">Войти</NavLink>
-                        </nav>
-                    </Route>
+                ) : (
+                    <div className="header__main">
+                        <Route exact path='/'>
+                            <Link to="/" >
+                                <img className="link header__logo" src={logo} alt="Логотип"/>
+                            </Link>
+                            <nav className="header__container">
+                                <NavLink to="/signup" className="link header__signup">Регистрация</NavLink>
+                                <NavLink to="/signin" className="link header__signin">Войти</NavLink>
+                            </nav>
+                        </Route>
+                    </div>           
                 )
             } 
             </div>

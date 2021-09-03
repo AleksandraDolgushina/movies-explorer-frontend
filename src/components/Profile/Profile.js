@@ -59,7 +59,7 @@ function Profile({onSaveProfile, onSignOut}) {
                     <input 
                         className="profile__input profile__input_type_email" 
                         id="email-input" 
-                        type="text" 
+                        type="email" 
                         name="email" 
                         placeholder={currentUser.email} 
                         required 
