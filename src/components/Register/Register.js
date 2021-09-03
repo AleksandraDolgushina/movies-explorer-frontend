@@ -41,10 +41,11 @@ function Register({handleRegister, isSave}) {
                         minLength='2'
                         maxLength='30'
                         autoComplete='off'
-                        onChange={handleChange}
+                        onChange={handleChange}     
+                        disabled={isSave}
                     />
                 </label>
-                <span className='login__input-error'>{errors.email}</span>
+                <span className='login__input-error'>{errors.name}</span>
                 <label className="regist__item">E-mail
                     <input 
                         className="regist__input" 
@@ -59,6 +60,7 @@ function Register({handleRegister, isSave}) {
                         pattern='^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$'
                         autoComplete='on'
                         onChange={handleChange}
+                        disabled={isSave}
                     />  
                 </label>
                 <span className='login__input-error'>{errors.email}</span>
@@ -76,9 +78,10 @@ function Register({handleRegister, isSave}) {
                         title='Пароль должен содержать не менее 1 заглавный буквы.'
                         autoComplete='off'
                         onChange={handleChange}
+                        disabled={isSave}
                     />
                 </label>
-                <span className='login__input-error'>{errors.email}</span>
+                <span className='login__input-error'>{errors.password}</span>
                 <button 
                      className={
                         isValid ? 'regist__save-button' : 'regist__save-button regist__save-button_disabled'
