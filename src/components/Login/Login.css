@@ -1,7 +1,6 @@
 .login {
     max-width: 385px;
-    margin: 0 auto;
-    margin-bottom: 70px;
+    margin: 70px auto;
 }
 .login__form {
     margin: 40px 0 15px;
@@ -49,6 +48,15 @@
     line-height: 17px;
     width: 100%;
 }
+.login__save-button:disabled {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+    opacity: .2;
+    cursor: default;
+}
 .login__text {
     font-size: 14px;
     line-height: 17px;
@@ -72,6 +80,16 @@
 }
 .login__item:focus {
     outline: none;
+}
+.login__input-error {
+    color: red;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 @media screen and (max-width: 520px) {
     .login {

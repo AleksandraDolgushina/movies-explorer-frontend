@@ -1,7 +1,6 @@
 .regist {
     max-width: 385px;
-    margin: 0 auto;
-    margin-bottom: 70px;
+    margin: 70px auto;
 }
 .regist__form {
     margin: 40px 0 15px;
@@ -60,6 +59,15 @@
     cursor: pointer;
     transition: opacity ease-in .2s;
 }
+.regist__save-button:disabled {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 2px;
+    opacity: .2;
+    cursor: default;
+}
 .regist__link {
     text-decoration: none;
     color: #3456F3;
@@ -71,6 +79,16 @@
 }
 .regist__item:focus {
     outline: none;
+}
+.regist__input-error {
+    color: red;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 @media screen and (max-width: 520px) {
     .regist {

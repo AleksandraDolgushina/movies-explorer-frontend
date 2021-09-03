@@ -8,6 +8,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #073042;
+    width: 100%;
 }
 .header__logo {
     margin: 18px 0 18px 60px;

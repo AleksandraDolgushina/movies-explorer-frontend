@@ -8,9 +8,8 @@
   }
   
   .not-found__title {
-    color: white;
     font-size: 140px;
-    line-height: 170;
+    line-height: 170px;
     font-weight: 400;
     margin: 0 auto;
   }

@@ -1,1 +1,1 @@
-# movies-explorer-frontend
+# Ссылка на проект https://dolgushina.diploma.nomoredomains.club/movies
