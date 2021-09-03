@@ -122,6 +122,9 @@ const App = () => {
         console.log(err);
         openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
       })
+      .finally(() => {
+        setIsSave(false);
+      });
   };
 
   const handleLogin = ({ email, password }) => {
@@ -143,7 +146,10 @@ const App = () => {
         } else {
           openErrorPopup('При авторизации произошла ошибка')
         }
-      });
+      })
+      .finally(() => {
+        setIsSave(false);
+      }) 
   };
 
   function searchMovies(name) {
