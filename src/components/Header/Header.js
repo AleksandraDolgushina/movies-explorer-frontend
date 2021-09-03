@@ -33,7 +33,7 @@ function Header({ loggedIn }) {
                             <div className="header__close-menu" onClick={handleMenuIsClose}></div>
                         </nav>
                         </div>
-                    </Route>
+                    </Route>                    
                 ) : (
                     <div className="header__main">
                         <Route exact path='/'>

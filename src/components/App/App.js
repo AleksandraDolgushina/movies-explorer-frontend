@@ -157,7 +157,7 @@ const App = () => {
       openErrorPopup('Нужно ввести ключевое слово');
       return;
     }
-    const moviesList = JSON.parse(localStorage.getItem('initalMovies'));
+    const moviesList = movies;
     const lastSearchList = moviesList.filter((movie) => {
       const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
       return (
