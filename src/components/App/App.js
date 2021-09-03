@@ -27,9 +27,8 @@ const App = () => {
   const [isShortMovies, setIsShortMovies] = React.useState(false);
   const [isShortSavedMovies, setIsShortSavedMovies] = React.useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = React.useState(false);
-  const [infoPopupTitle, setInfoPopupTitle] = React.useState({
-    title: 'Что-то пошло не так! Попробуйте ещё раз.',
-  });
+  const [infoPopupTitle, setInfoPopupTitle] = React.useState({});
+  const [isSave, setIsSave] = React.useState(false)
   let location = useLocation()
 
   React.useEffect(() => {
@@ -96,6 +95,7 @@ const App = () => {
     if (!name || !email || !password) {
       return  
     }
+    setIsSave(true)
     mainApi
       .register( name, email, password )
       .then((res) => {
@@ -128,6 +128,7 @@ const App = () => {
     if (!email || !password) {
       return
     }
+    setIsSave(true)
     mainApi
       .authorize( email, password )
       .then((res) => {
@@ -142,7 +143,6 @@ const App = () => {
         } else {
           openErrorPopup('При авторизации произошла ошибка')
         }
-        openErrorPopup('Что-то пошло не так! Попробуйте ещё раз.');
       });
   };
 
@@ -335,10 +335,10 @@ const App = () => {
         <div className='page'>
           <Switch>
             <Route path='/signin'>
-                <Login handleLogin={handleLogin} />
+                <Login handleLogin={handleLogin} isSave={isSave}/>
             </Route>
             <Route path='/signup'>
-                <Register handleRegister={handleRegister} />
+                <Register handleRegister={handleRegister} isSave={isSave} />
             </Route>
             <Route exact path='/'>
               <Main />

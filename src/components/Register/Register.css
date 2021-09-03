@@ -80,6 +80,16 @@
 .regist__item:focus {
     outline: none;
 }
+.regist__input-error {
+    color: red;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
 @media screen and (max-width: 520px) {
     .regist {
         max-width: 260px;

@@ -8,6 +8,12 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
         `movie__like ${isSaved && 'movie__like_active'}`
     );
 
+    function durationFormat(duration) {
+        const hh = Math.trunc(duration / 60)
+        const mm = duration % 60
+        return `${hh > 0 ? hh + 'ч ' : ''}${mm}м`
+      }
+
     function handleLikeClick() {
         onLikeClick(movie)
     }
@@ -35,7 +41,7 @@ function MoviesCard({movie, isSavedMovies, onLikeClick, onDeleteClick}) {
                     <button className="movie__delete" type='button' onClick={handleDeleteClick}></button>
                 </Route>
             </div>
-            <p className="movie__duration">{movie.duration}</p>
+            <p className="movie__duration">{durationFormat(movie.duration)}</p>
         </div>
     )
 }

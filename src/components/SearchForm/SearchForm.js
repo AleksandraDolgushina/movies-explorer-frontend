@@ -18,7 +18,13 @@ function SearchForm({getMovies, onFilterShort, isLoading}) {
 
     return (
         <section className="search">
-            <form className="search__form" name="search" onSubmit={handleOnSubmit}>
+            <form 
+                className="search__form" 
+                name="search" 
+                onSubmit={handleOnSubmit} 
+                noValidate 
+                disabled={!isValid || isLoading}
+            >
                 <img className="search__image_white" src={search_white} alt="Поиск"/>
                 <input 
                     className="search__input" 

@@ -3,9 +3,11 @@ import logo from "../../images/logo.svg"
 import './Login.css'
 import useFormWithValidation from '../../hooks/useFormValidation'
 
-function Login({handleLogin}) {
+function Login({handleLogin, isSave}) {
     const {
         values,
+        errors,
+        isValid,
         handleChange,
         resetForm
     } = useFormWithValidation({})
@@ -44,6 +46,7 @@ function Login({handleLogin}) {
                         onChange={handleChange}
                     />  
                 </label>
+                <span className='login__input-error'>{errors.email}</span>
                 <label className="login__item">Пароль
                     <input 
                         className="login__input" 
@@ -60,10 +63,14 @@ function Login({handleLogin}) {
                         onChange={handleChange}
                     />
                 </label>
-                <button 
-                    className="login__save-button" 
+                <span className='login__input-error'>{errors.email}</span>
+                <button                   
+                    className={
+                        isValid ? 'login__save-button' : 'login__save-button login__save-button_disabled'
+                      }
                     type="submit"
-                    >Войти</button>
+                    disabled={!isValid || isSave}
+                >Войти</button>
             </form>
             <p className="login__text">Еще не зарегистрированы? 
                 <Link to="/signup" className="login__link"> Регистрация</Link>

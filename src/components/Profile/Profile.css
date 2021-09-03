@@ -77,16 +77,13 @@
     background-color: rgb(200, 200, 200);
 }
   
-.profile__error {
-    padding: 20px;
+.profile__input-error {
+    color: red;
     font-style: normal;
     font-weight: normal;
     font-size: 11px;
     line-height: 13px;
     text-align: center;
-    color: #ff004c;
-}
-  
-.profile__input-error {
-    color: red;
+    display: flex;
+    justify-content: center;
 }

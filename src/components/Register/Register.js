@@ -3,9 +3,11 @@ import useFormWithValidation from "../../hooks/useFormValidation";
 import logo from "../../images/logo.svg"
 import './Register.css'
 
-function Register({handleRegister}) {
+function Register({handleRegister, isSave}) {
     const {
         values,
+        errors,
+        isValid,
         handleChange,
         resetForm,
       } = useFormWithValidation({})
@@ -42,6 +44,7 @@ function Register({handleRegister}) {
                         onChange={handleChange}
                     />
                 </label>
+                <span className='login__input-error'>{errors.email}</span>
                 <label className="regist__item">E-mail
                     <input 
                         className="regist__input" 
@@ -58,6 +61,7 @@ function Register({handleRegister}) {
                         onChange={handleChange}
                     />  
                 </label>
+                <span className='login__input-error'>{errors.email}</span>
                 <label className="regist__item">Пароль
                     <input 
                         className="regist__input" 
@@ -74,9 +78,13 @@ function Register({handleRegister}) {
                         onChange={handleChange}
                     />
                 </label>
+                <span className='login__input-error'>{errors.email}</span>
                 <button 
-                    className="regist__save-button"
+                     className={
+                        isValid ? 'regist__save-button' : 'regist__save-button regist__save-button_disabled'
+                      }
                     type="submit"
+                    disabled={!isValid || isSave}
                 >
                     Зарегистрироваться</button>
             </form>
