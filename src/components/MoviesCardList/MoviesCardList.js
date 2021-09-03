@@ -101,52 +101,100 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovie }) {
   const value = React.useContext(MovieContext);
   const movies = value.movies;
   const savedMovies = value.savedMovies;
-  const [count, setCount] = React.useState(0);
-  const [cards, setCards] = React.useState(0);
+  // const [count, setCount] = React.useState(0);
+  // const [cards, setCards] = React.useState(0);
   
-    function useWindowSize() {
-        const [size, setSize] = React.useState(0);
-        React.useEffect(() => {
-        function updateSize() {
-            setSize(window.innerWidth);
-        }
-        window.addEventListener('resize', updateSize);
-        updateSize();
-        return () => window.removeEventListener('resize', updateSize);
-    }, []);
-        return size;
-    }
-    const windowSize = useWindowSize()
-    function increment() {
-        setCount(count + cards);
-    }
+  //   function useWindowSize() {
+  //       const [size, setSize] = React.useState(0);
+  //       React.useEffect(() => {
+  //         function updateSize() {
+  //             setSize(window.innerWidth);
+  //         }
+  //         window.addEventListener('resize', updateSize);
+  //         updateSize();
+  //         return () => window.removeEventListener('resize', updateSize);
+  //   }, []);
+  //       return size;
+  //   }
+  //   const windowSize = useWindowSize()
+  //   function increment() {
+  //       setCount(count + cards);
+  //   }
     
-    React.useEffect(() => {
-        function getSize() {
+  //   React.useEffect(() => {
+  //       function getSize() {
+  //         if (windowSize > 768) {
+  //           setCount(12);
+  //           setCards(3);
+  //         }
+  //         if (windowSize > 480 && windowSize <= 768){
+  //           setCount(8);
+  //           setCards(2);
+  //         }
+  //         if (windowSize < 480) {
+  //           setCount(5);
+  //           setCards(2);
+  //         }
+  //       }
+  //       getSize();
+  //     }, [windowSize]);
+
+  const [extraPortion, setExtraPortion] = React.useState(3)
+      const [currentCount, setCurrenCount] = React.useState(0)
+      const [renderMovies, setRenderMovies] = React.useState([])
+    
+      function getCount(windowSize) {
           if (windowSize > 768) {
-            setCount(12);
-            setCards(3);
+          return { first: 12, extra: 3 }
+          } else if (windowSize > 480 && windowSize <= 768) {
+          return { first: 8, extra: 2 }
+          } else {
+          return { first: 5, extra: 2 }
           }
-          if (windowSize > 480 && windowSize <= 768){
-            setCount(8);
-            setCards(2);
+      }
+  
+      function renderExtraPortion() {
+          const count = Math.min(movies.length, currentCount + extraPortion)
+          const extraMovies = movies.slice(currentCount, count)
+          setRenderMovies([...renderMovies, ...extraMovies])
+          setCurrenCount(count)
+      }
+          
+      function handleResize() {
+          const windowSize = window.innerWidth
+          const sizePortion = getCount(windowSize)
+          setExtraPortion(sizePortion.extra)
+      }
+  
+      React.useEffect(() => {
+          window.addEventListener('resize', handleResize)
+  
+          return () => {
+              window.removeEventListener('resize', handleResize)
           }
-          if (windowSize < 480) {
-            setCount(5);
-            setCards(2);
-          }
-        }
-        getSize();
-      }, [windowSize]);
+      }, [])
+  
+      React.useEffect(() => {
+          const windowSize = window.innerWidth
+          const sizePortion = getCount(windowSize)
+          setExtraPortion(sizePortion.extra)
+          const count = Math.min(movies.length, sizePortion.first)
+          setRenderMovies(movies.slice(0, count))
+          setCurrenCount(count)
+      }, [movies])
+  
+      function handleMoreCards() {
+          renderExtraPortion()
+      }
 
   return (
     <main className='cards'>
       {movies && (
         <Route path='/movies'>
           <section className='cards__movies'>
-            {movies.length > count &&
+            {movies.length > currentCount &&
               movies
-                .slice(0, count)
+                .slice(0, currentCount)
                 .map((movie) => (
                   <MoviesCard
                     key={movie.id}
@@ -156,7 +204,7 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovie }) {
                     isSavedMovies={isSavedMovie}
                   />
                 ))}
-            {movies.length <= count &&
+            {movies.length <= currentCount &&
               movies.map((movie) => (
                 <MoviesCard
                   key={movie.id}
@@ -167,11 +215,11 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovie }) {
                 />
               ))}
           </section>
-            {count < movies.length && (
+            {currentCount >= movies.length && (
                 <button
                     className='cards__more'
                     aria-label='Показать еще'
-                    onClick={increment}
+                    onClick={handleMoreCards}
                 >
                     Ещё
                 </button>
@@ -181,9 +229,9 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovie }) {
       {savedMovies.length > 0 && (
         <Route path='/saved-movies'>
           <section className='cards__movies'>
-            {savedMovies.length > count &&
+            {savedMovies.length > currentCount &&
               savedMovies
-                .slice(0, count)
+                .slice(0, currentCount)
                 .map((movie) => (
                   <MoviesCard
                     key={movie.movieId}
@@ -192,7 +240,7 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovie }) {
                     isSavedMovies={isSavedMovie}
                   />
                 ))}
-            {savedMovies.length <= count &&
+            {savedMovies.length <= currentCount &&
               savedMovies.map((movie) => (
                 <MoviesCard
                   key={movie.movieId}

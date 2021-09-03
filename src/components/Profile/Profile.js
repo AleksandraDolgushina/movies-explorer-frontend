@@ -71,7 +71,7 @@ function Profile({onSaveProfile, onSignOut}) {
                 </label>
                 <span
                     className={`profile__input-error ${
-                        isValid && 'profile__input-error_visible'
+                        !isValid && 'profile__input-error_visible'
                     }`}
                 >
                     {errors.email}

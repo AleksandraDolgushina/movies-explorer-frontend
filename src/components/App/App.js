@@ -173,14 +173,14 @@ const App = () => {
     return lastSearchList;
   }
 
-  function getMovieslist(name) {
+  function getMovieslist() {
     if (loggedIn) {
       setIsLoading(true);
       moviesApi
         .getMovies()
         .then((moviesData) => {
           localStorage.setItem('initalMovies', JSON.stringify(moviesData));
-          searchMovies(name);
+          setMovies(moviesData);
         })
         .catch((err) => {
           openErrorPopup(
@@ -230,12 +230,12 @@ const App = () => {
   }
 
   function handleMovieDelete(movie) {
-    const movieId = savedMovies.find((i) => i.movieId === movie.id)._id;
+    const movieId = savedMovies.find((i) => i.movieId === movie.id);
     mainApi
-      .deleteMovies(movieId)
+      .deleteMovies(movieId._id)
       .then((res) => {
         const newSavedMovies = savedMovies.filter(
-          (i) => i.movieId !== res.movieId
+          (i) => i.movieId !== movie.id
         );
         setSavedMovies(newSavedMovies);
         localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies));
@@ -249,7 +249,7 @@ const App = () => {
     mainApi
       .deleteMovies(movie._id)
       .then((res) => {
-        const newSavedMovies = savedMovies.filter((i) => i._id !== res._id);
+        const newSavedMovies = savedMovies.filter((i) => i._id !== movie._id);
         setSavedMovies(newSavedMovies);
         localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies));
       })
@@ -283,6 +283,12 @@ const App = () => {
         )
       : setSavedMovies(savedMoviesList);
   }, [isShortSavedMovies]);
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      getMovieslist()
+    }
+  }, [loggedIn])
 
   function handleUpdateProfile({ name, email }) {
     setIsLoading(true);
@@ -355,7 +361,7 @@ const App = () => {
               component={Movies}
               isLoading={isLoading}
               onFilterShort={handleToggleShortMovies}
-              getMovies={getMovieslist}
+              getMovies={searchMovies}
               onLikeClick={handleSavedMovie}
               onDeleteClick={handleMovieDelete}
               isSavedMovie={isSavedMovie}
