@@ -30,11 +30,11 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovie }) {
 
   React.useEffect(() => {
       function getSize() {
-        if (windowSize >= 1280) {
+        if (windowSize >= 1240) {
           setCount(12);
           setCards(3);
         }
-        if (windowSize < 1280 && windowSize > 767) {
+        if (windowSize < 1240 && windowSize > 767) {
           setCount(8);
           setCards(2);
         }

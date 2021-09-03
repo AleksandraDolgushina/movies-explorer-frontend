@@ -65,7 +65,7 @@ function Login({handleLogin, isSave}) {
                         disabled={isSave}
                     />
                 </label>
-                <span className='login__input-error'>{errors.password}</span>
+                <span className='login__input-error'>Пароль должен содержать не менее одной цифры и не менее одной заглавной буквы</span>
                 <button                   
                     className={
                         isValid ? 'login__save-button' : 'login__save-button login__save-button_disabled'
