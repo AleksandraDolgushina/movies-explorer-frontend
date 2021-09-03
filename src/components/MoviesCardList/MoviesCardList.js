@@ -74,7 +74,7 @@ function MoviesCardList({ onLikeClick, onDeleteClick, isSavedMovie }) {
                 />
               ))}
           </section>
-            {count >= movies.length && (
+            {count < movies.length && (
                 <button
                     className='cards__more'
                     aria-label='Показать еще'

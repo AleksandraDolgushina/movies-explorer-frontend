@@ -157,7 +157,7 @@ const App = () => {
       openErrorPopup('Нужно ввести ключевое слово');
       return;
     }
-    const moviesList = movies;
+    const moviesList = JSON.parse(localStorage.getItem('initalMovies'));
     const lastSearchList = moviesList.filter((movie) => {
       const nameEN = movie.nameEN ? movie.nameEN : movie.nameRU;
       return (
@@ -180,7 +180,7 @@ const App = () => {
         .getMovies()
         .then((moviesData) => {
           localStorage.setItem('initalMovies', JSON.stringify(moviesData));
-          setMovies(moviesData);
+          //setMovies(moviesData);
         })
         .catch((err) => {
           openErrorPopup(
